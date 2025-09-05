@@ -1,0 +1,262 @@
+<!DOCTYPE html> 
+<html lang="es"> 
+<head> 
+  <meta charset="utf-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1"> 
+  <title>ライブ</title> 
+  <script src="https://cdn.tailwindcss.com"></script> 
+  <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+  <style>
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-dvh">
+<div class="max-w-5xl mx-auto p-4 sm:p-6">
+
+  <!-- Header -->
+  <header class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 mb-6">
+    <div>
+      <h1 class="text-2xl sm:text-3xl font-bold">ライブビデオ</h1>
+      <p class="text-sm text-slate-500">Reproduce cualquier enlace MP4</p>
+    </div>
+    <div class="flex items-center gap-2 text-xs text-slate-500 sm:col-span-5">
+      <input id="search" type="text" placeholder="Buscar video..." class="px-4 py-2 text-base rounded-2xl border outline-none w-full focus:ring-2 focus:ring-indigo-400" />
+    </div>
+  </header>
+
+  <!-- Formulario -->
+  <section class="grid grid-cols-1 gap-3 sm:grid-cols-12 mb-4">
+    <input id="input-url" type="text" placeholder="Pega enlace de video" class="sm:col-span-7 px-3 py-2 rounded-xl border outline-none focus:ring-2 focus:ring-indigo-400" />
+    <input id="input-title" type="text" placeholder="Título (opcional)" class="sm:col-span-4 px-3 py-2 rounded-xl border outline-none focus:ring-2 focus:ring-indigo-400" />
+    <button id="btn-add" class="sm:col-span-1 px-4 py-2 rounded-xl bg-indigo-600 text-white font-medium hover:bg-indigo-700">+</button>
+  </section>
+
+  <!-- Player y lista -->
+  <main class="grid grid-cols-1 lg:grid-cols-12 gap-4">
+    <!-- Reproductor -->
+    <section class="lg:col-span-7 bg-white rounded-2xl shadow border overflow-hidden flex flex-col">
+      <div class="aspect-video bg-slate-200">
+        <video id="player" class="w-full h-full" controls autoplay></video>
+      </div>
+      <div class="p-3 border-t flex items-center justify-between gap-2">
+        <div class="min-w-0">
+          <div id="now-title" class="font-semibold truncate">Sin reproducción</div>
+        </div>
+        <div class="flex items-center gap-2">
+          <button id="prev" class="px-3 py-2 rounded-xl border hover:bg-slate-50">←</button>
+          <button id="next" class="px-3 py-2 rounded-xl border hover:bg-slate-50">→</button>
+          <button id="shuffle" class="px-3 py-2 rounded-xl border hover:bg-slate-50">⇄</button>
+          <button id="loop" class="px-3 py-2 rounded-xl border hover:bg-slate-50">⟳</button>
+          <label class="text-xs flex items-center gap-1 px-2 py-2 rounded-xl border hover:bg-slate-50 cursor-pointer">
+            <input id="autonext" type="checkbox" class="accent-indigo-600" /> Autonext
+          </label>
+        </div>
+      </div>
+    </section>
+
+    <!-- Lista -->
+    <section class="lg:col-span-5 bg-white rounded-2xl shadow border overflow-hidden flex flex-col">
+      <div class="p-3 border-b flex items-center justify-between gap-2">
+        <div class="flex items-center gap-2">
+          <label for="playlist" class="font-semibold">Playlist:</label>
+          <select id="playlist" class="px-2 py-1 rounded-lg border text-sm"></select>
+          <button id="btn-new" class="px-2 py-1 rounded-lg border text-xs hover:bg-slate-50">Nueva</button>
+          <button class="px-2 py-1 rounded-lg border text-xs hover:bg-slate-50" id="btnExport">Exportar</button>
+          <input type="file" id="btnImport" accept=".json" style="display:none;">
+          <label for="btnImport" class="px-2 py-1 rounded-lg border text-xs hover:bg-slate-50" style="cursor:pointer;">Importar</label>       
+        </div>
+      </div>
+      <div id="list" class="flex-1 overflow-auto max-h-96 divide-y no-scrollbar"></div>
+    </section>
+  </main>
+
+  <footer class="mt-8 text-center text-xs text-slate-400">
+    Reproduce enlaces directos de video en formato MP4
+  </footer>
+</div>
+
+<!-- Script -->
+<script>
+const STORAGE = "playlistsV3";
+let state = { playlists:{}, active:null };
+
+const elPlayer=document.getElementById("player");
+const elNow=document.getElementById("now-title");
+const elList=document.getElementById("list");
+const elSelect=document.getElementById("playlist");
+
+// Evento autonext: cuando termina un video
+elPlayer.onended = () => {
+  const pl = currentPl();
+  if(!pl.autonext) return;
+  if(pl.loop) return play(pl.current);
+  next();
+};
+
+function save(){ localStorage.setItem(STORAGE, JSON.stringify(state)); }
+function load(){
+  const s = JSON.parse(localStorage.getItem(STORAGE)||"{}");
+  if(s.playlists) state.playlists = s.playlists;
+  if(s.active) state.active = s.active;
+  if(!state.active || !state.playlists[state.active]){
+    state.playlists = { "All":{list:[],current:-1,shuffle:false,loop:false,autonext:true} };
+    state.active = "All";
+  }
+}
+function currentPl(){ return state.playlists[state.active]; }
+function rebuildAll(){
+  let all = [];
+  for(const [name,pl] of Object.entries(state.playlists)){
+    if(name==="All") continue;
+    all.push(...pl.list);
+  }
+  state.playlists["All"].list = all;
+  if(all.length && state.playlists["All"].current===-1) state.playlists["All"].current=0;
+}
+
+function renderSelect(){
+  elSelect.innerHTML="";
+  Object.keys(state.playlists).forEach(name=>{
+    let opt=document.createElement("option");
+    opt.value=name; opt.textContent=name;
+    if(name===state.active) opt.selected=true;
+    elSelect.appendChild(opt);
+  });
+}
+function renderList(filter=null){
+  const pl=currentPl();
+  elList.innerHTML="";
+  const arr=filter||pl.list;
+  if(!arr.length){
+    elList.innerHTML='<div class="p-6 text-center text-slate-400">Playlist vacía 👆</div>';
+    return;
+  }
+  arr.forEach((item,i)=>{
+    const idx=pl.list.indexOf(item);
+    let row=document.createElement("div");
+    row.className="p-3 flex items-center gap-2 hover:bg-slate-50 cursor-grab";
+    if(idx===pl.current) row.classList.add("bg-indigo-50");
+    row.innerHTML=`
+      <div class="w-6 text-xs text-center text-slate-500">${idx+1}</div>
+      <div class="flex-1 min-w-0"><div class="font-medium truncate">${item.title||"Video "+(idx+1)}</div></div>
+      <button class="px-2 py-1 rounded-lg border text-xs hover:bg-slate-50">▷</button>
+      <button class="px-2 py-1 rounded-lg border text-xs hover:bg-slate-50">✖︎</button>`;
+    row.children[2].onclick=()=>play(idx);
+    row.children[3].onclick=()=>remove(idx);
+    elList.appendChild(row);
+  });
+  new Sortable(elList,{animation:150,onEnd:evt=>{
+      const pl=currentPl();
+      const mv=pl.list.splice(evt.oldIndex,1)[0];
+      pl.list.splice(evt.newIndex,0,mv);
+      if(pl.current===evt.oldIndex) pl.current=evt.newIndex;
+      save(); render();
+  }});
+}
+function renderPlayer(){
+  const pl=currentPl();
+  const v=pl.list[pl.current];
+  if(!v){ elPlayer.src=""; elNow.textContent="Sin reproducción"; return; }
+  elPlayer.src=v.url;
+  elNow.textContent=v.title||"Reproduciendo";
+}
+function render(){
+  rebuildAll();
+  renderSelect(); renderList(); renderPlayer();
+  document.getElementById("autonext").checked=currentPl().autonext;
+  document.getElementById("shuffle").classList.toggle("bg-slate-200",currentPl().shuffle);
+  document.getElementById("loop").classList.toggle("bg-slate-200",currentPl().loop);
+}
+
+/* acciones */
+function add(){
+  const url=document.getElementById("input-url").value.trim();
+  const title=document.getElementById("input-title").value.trim();
+  if(!url) return alert("Enlace inválido");
+  currentPl().list.push({url,title});
+  if(currentPl().current===-1) currentPl().current=0;
+  document.getElementById("input-url").value="";
+  document.getElementById("input-title").value="";
+  save(); render();
+}
+function remove(idx){
+  const pl=currentPl();
+  pl.list.splice(idx,1);
+  if(pl.current>=pl.list.length) pl.current=pl.list.length-1;
+  save(); render();
+}
+function play(idx){ currentPl().current=idx; save(); render(); }
+function next(){
+  const pl=currentPl(); if(!pl.list.length) return;
+  if(pl.loop) return play(pl.current);
+  play((pl.current+1)%pl.list.length);
+}
+function prev(){
+  const pl=currentPl(); if(!pl.list.length) return;
+  play((pl.current-1+pl.list.length)%pl.list.length);
+}
+function toggleShuffle(){
+  const pl=currentPl(); pl.shuffle=!pl.shuffle;
+  if(pl.shuffle) pl.list=pl.list.sort(()=>Math.random()-0.5);
+  save(); render();
+}
+
+/* eventos */
+document.getElementById("btn-add").onclick=add;
+document.getElementById("prev").onclick=prev;
+document.getElementById("next").onclick=next;
+document.getElementById("shuffle").onclick=toggleShuffle;
+document.getElementById("loop").onclick=()=>{ currentPl().loop=!currentPl().loop; save(); render(); };
+document.getElementById("autonext").onchange=e=>{ currentPl().autonext=e.target.checked; save(); };
+elSelect.onchange=()=>{ state.active=elSelect.value; save(); render(); };
+document.getElementById("btn-new").onclick=()=>{
+  const name=prompt("Nombre de la playlist:");
+  if(!name) return;
+  if(state.playlists[name]) return alert("Ya existe");
+  state.playlists[name]={list:[],current:-1,shuffle:false,loop:false,autonext:true};
+  state.active=name; save(); render();
+};
+document.getElementById("search").oninput=e=>{
+  const q=e.target.value.toLowerCase();
+  const pl=currentPl();
+  const f=pl.list.filter(v=>(v.title||"").toLowerCase().includes(q));
+  renderList(f);
+};
+
+/* Export / Import */
+function exportData(){
+  const dataStr = JSON.stringify(state.playlists, null, 2);
+  const blob = new Blob([dataStr], {type: "application/json"});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "mis_playlists.json";
+  a.click();
+  URL.revokeObjectURL(url);
+}
+function importData(file){
+  const reader = new FileReader();
+  reader.onload = e => {
+    try {
+      const imported = JSON.parse(e.target.result);
+      state.playlists = imported;
+      save();
+      render();
+      alert("✅ Playlists importadas correctamente");
+    } catch(err){
+      alert("❌ Archivo inválido");
+    }
+  };
+  reader.readAsText(file);
+}
+document.getElementById("btnExport").addEventListener("click", exportData);
+document.getElementById("btnImport").addEventListener("change", e => {
+  if(e.target.files[0]) importData(e.target.files[0]);
+});
+
+/* inicio */
+load(); render();
+</script>
+</body>
+</html>
