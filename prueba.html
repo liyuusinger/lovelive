@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Líneas con traducción (guardado)</title>
+<style>
+    body { font-family: Arial, sans-serif; padding: 10px; }
+.bloque { margin-bottom: 15px; display: flex; flex-direction: column; align-items: center; }
+.linea h1 { 
+    margin: 0;
+    font-size: 16px; 
+    text-align: center; 
+    cursor: pointer; 
+    word-break: break-word;
+}
+.traduccion {
+    font-size: 14px;
+    color: gray;
+    margin-top: 2px;
+    width: 100%;
+    cursor: pointer;
+}
+span {
+    color: black;
+    box-shadow: inset 0 -0.1em 0 #ffdd3c;
+    margin-bottom:0;
+  }
+   .circulo {
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  line-height: 25px;
+  text-align: center;
+  border: 1px solid #ffdd3c;
+  border-radius: 50%;
+
+/* Ajustes extra para pantallas pequeñas */
+@media (max-width: 600px) {
+    .linea h1 { font-size: 18px; }
+    .traduccion { font-size: 16px; }
+}
+</style>
+</head>
+<body>
+
+<h2>Líneas con traducción</h2>
+<button onclick="eliminarUltimaLinea()">Eliminar última línea</button>
+
+<div id="contenedor"></div>
+
+<script>
+let datos = JSON.parse(localStorage.getItem("lineas")) || [];
+let contador = datos.length;
+
+// Renderiza todas las líneas guardadas
+function render() {
+    const contenedor = document.getElementById("contenedor");
+    contenedor.innerHTML = "";
+    datos.forEach((item,index) => crearBloque(item.linea,item.traduccion,index));
+}
+
+// Eliminar última línea
+function eliminarUltimaLinea() {
+    if(datos.length>0){
+        datos.pop();
+        guardar();
+        render();
+        contador = datos.length;
+    }
+}
+
+// Convierte texto a HTML con spans por bloques separados por espacios
+function convertirATextoHTML(texto){
+    const bloques = texto.split(/\s+/);
+    let resultado = '';
+
+    bloques.forEach(bloque => {
+        if(!bloque) return;
+
+        const soloParticula = /^-(.+)-$/.exec(bloque);
+        if(soloParticula){
+            resultado += `<span class="circulo">${soloParticula[1]}</span> `;
+            return;
+        }
+
+        let innerHTML = '';
+        let regex = /([^\(\)\-]+)\(([^\(\)]+)\)|-(.+?)-|./g;
+        let match;
+        while((match = regex.exec(bloque)) !== null){
+            if(match[1] && match[2]){
+                innerHTML += `<ruby>${match[1]}<rt>${match[2]}</rt></ruby>`;
+            } else if(match[3]){
+                innerHTML += `<span class="circulo">${match[3]}</span>`;
+            } else {
+                innerHTML += match[0];
+            }
+        }
+
+        resultado += `<span>${innerHTML}</span> `;
+    });
+
+    return `<h1 style="margin-bottom:0;text-align:center;font-size:18px;">${resultado.trim()}</h1>`;
+}
+
+function crearBloque(textoLinea,textoTrad,index){
+    const contenedor = document.getElementById("contenedor");
+    const bloque = document.createElement("div");
+    bloque.className = "bloque";
+
+    const lineaDiv = document.createElement("div");
+    lineaDiv.className = "linea";
+    lineaDiv.innerHTML = convertirATextoHTML(textoLinea);
+
+    // --- Activar edición con un solo clic ---
+    lineaDiv.addEventListener("click", () => {
+        lineaDiv.contentEditable = "true";
+        lineaDiv.innerText = datos[index].linea;
+        lineaDiv.focus();
+    });
+
+    // Atajo Ctrl+Shift+P para marcar selección como partícula
+    lineaDiv.addEventListener("keydown", function(e){
+        // Insertar nueva línea con Enter
+        if(e.key === "Enter"){
+            e.preventDefault();
+            agregarLineaDespues(index);
+        }
+
+        if(e.ctrlKey && e.shiftKey && e.key.toLowerCase() === "p"){
+            e.preventDefault();
+            const sel = window.getSelection();
+            if(sel.rangeCount > 0){
+                const range = sel.getRangeAt(0);
+                const selectedText = range.toString();
+                if(selectedText){
+                    const spanText = `-${selectedText}-`;
+                    range.deleteContents();
+                    range.insertNode(document.createTextNode(spanText));
+                    range.collapse(false);
+                    sel.removeAllRanges();
+                    sel.addRange(range);
+                }
+            }
+        }
+    });
+
+    lineaDiv.onblur = function(){
+        let nuevoTexto = lineaDiv.innerText.trim();
+        if(nuevoTexto === "") nuevoTexto = "Línea "+(index+1);
+        datos[index].linea = nuevoTexto;
+        guardar();
+        render();
+    };
+
+    // Traducción editable
+    const traduccionDiv = document.createElement("div");
+    traduccionDiv.className = "traduccion";
+    traduccionDiv.textContent = textoTrad;
+
+    traduccionDiv.addEventListener("click", () => {
+        traduccionDiv.contentEditable = "true";
+        traduccionDiv.focus();
+    });
+
+    traduccionDiv.onblur = function(){
+        traduccionDiv.contentEditable = "false";
+        let texto = traduccionDiv.innerText;
+        texto = texto.replace(/&nbsp;/g,"\u00A0");
+        if(texto.trim()==="") texto = "Traducción "+(index+1);
+        traduccionDiv.innerText = texto;
+        datos[index].traduccion = texto;
+        guardar();
+    };
+
+    bloque.appendChild(lineaDiv);
+    bloque.appendChild(traduccionDiv);
+    contenedor.appendChild(bloque);
+}
+
+// --- Agrega nueva línea debajo de la actual ---
+function agregarLineaDespues(index){
+    contador++;
+    datos.splice(index+1,0,{linea:"Línea "+contador, traduccion:"Traducción "+contador});
+    guardar();
+    render();
+    // Activar edición en la nueva línea automáticamente
+    const contenedor = document.getElementById("contenedor");
+    const nuevaLinea = contenedor.children[index+1].querySelector(".linea");
+    nuevaLinea.click();
+}
+
+function guardar(){
+    localStorage.setItem("lineas",JSON.stringify(datos));
+}
+
+render();
+</script>
+
+</body>
+</html>
