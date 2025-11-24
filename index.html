@@ -1,265 +1,292 @@
-<!DOCTYPE html> 
-<html lang="es"> 
-<head> 
-  <meta charset="utf-8"> 
-  <meta name="viewport" content="width=device-width, initial-scale=1"> 
-  <title>ライブ</title> 
-  <script src="https://cdn.tailwindcss.com"></script> 
-  <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
-  <style>
-    .no-scrollbar::-webkit-scrollbar { display: none; }
-    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-  </style>
+<html>
+<head>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kurenaido&display=swap" rel="stylesheet">
+<link rel="icon" type="image/x-icon" href="https://i.ibb.co/d49mP7R6/Proyecto-nuevo-3.png">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ラブライブ！</title>
 </head>
-<body class="bg-slate-50 text-slate-800 min-h-dvh">
-<div class="max-w-5xl mx-auto p-4 sm:p-6">
+<body>
+<style>
+body {
+  background-color: #4f97f6;
+  font-family: "Zen Kurenaido", sans-serif;
+}
+p {
+ font-family: "Zen Kurenaido", sans-serif;
+}
+/* ------------------------------ */
+/* ESTILOS DE ESCRITORIO (POR DEFECTO)      */
+/* ------------------------------ */
+.mobile-box {
+  width: 1000px; /* Ancho para escritorio */
+  height: 1000px; /* Altura para escritorio */
+  margin-left: 160px; /* Margen para posicionamiento en escritorio */
+  margin-top: 100px;
+  background-color: #ffffff;
+  border-radius: 20px;
+}
 
-  <!-- Header -->
-  <header class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 mb-6">
-    <div>
-      <h1 class="text-2xl sm:text-3xl font-bold">ライブビデオ</h1>
-      <p class="text-sm text-slate-500">Reproduce cualquier enlace MP4</p>
-    </div>
-    <div class="flex items-center gap-2 text-xs text-slate-500 sm:col-span-5">
-      <input id="search" type="text" placeholder="Buscar video..." class="px-4 py-2 text-base rounded-2xl border outline-none w-full focus:ring-2 focus:ring-indigo-400" />
-    </div>
-  </header>
+/* Estilo para el contenedor de la imagen de encabezado en Escritorio */
+.header-container {
+    width: 1000px;
+    height: 200px; 
+    overflow: hidden;
+    margin: 0 auto;
+}
 
-  <!-- Formulario -->
-  <section class="grid grid-cols-1 gap-3 sm:grid-cols-12 mb-4">
-    <input id="input-url" type="text" placeholder="Pega enlace de video" class="sm:col-span-7 px-3 py-2 rounded-xl border outline-none focus:ring-2 focus:ring-indigo-400" />
-    <input id="input-title" type="text" placeholder="Título (opcional)" class="sm:col-span-4 px-3 py-2 rounded-xl border outline-none focus:ring-2 focus:ring-indigo-400" />
-    <button id="btn-add" class="sm:col-span-1 px-4 py-2 rounded-xl bg-indigo-600 text-white font-medium hover:bg-indigo-700">+</button>
-  </section>
+/* La imagen dentro del contenedor de encabezado para escritorio */
+.header-container img {
+    width: 100%; 
+    height: 100%;
+    object-fit: cover; 
+    object-position: 0 20%;
+}
 
-  <!-- Player y lista -->
-  <main class="grid grid-cols-1 lg:grid-cols-12 gap-4">
-    <!-- Reproductor -->
-    <section class="lg:col-span-7 bg-white rounded-2xl shadow border overflow-hidden flex flex-col">
-      <div class="aspect-video bg-slate-200">
-        <video id="player" class="w-full h-full" controls autoplay></video>
+
+.carousel-container {
+  width: 930px;
+  height: 280px;
+  margin-left:40px;
+  border-radius: 5px;
+  overflow: hidden;
+  position: relative;
+  
+}
+
+.carousel-track {
+  display: flex;
+  transition: transform 0.3s ease;
+  
+  /* PROPIEDADES CLAVE PARA EL DESPLAZAMIENTO TÁCTIL */
+  overflow-x: auto; /* Permite el desplazamiento horizontal */
+  -webkit-overflow-scrolling: touch; /* Hace que el desplazamiento sea suave en iOS */
+  scroll-snap-type: x mandatory; /* Opcional: Ayuda a que se detenga justo en cada imagen */
+  
+  /* Oculta la barra de desplazamiento que se puede generar, si no la deseas */
+  scrollbar-width: none; /* Para Firefox */
+}
+
+/* Ocultar la barra de desplazamiento para navegadores basados en WebKit (Chrome, Safari) */
+.carousel-track::-webkit-scrollbar {
+  display: none;
+}
+
+.carousel-container img {
+  width: 240px;
+  border-radius: 2px;
+  margin-top: 20px;
+  margin-left: 50px;
+  flex-shrink: 0;
+}
+
+.arrow {
+  position: absolute;
+  top: 45%;
+  transform: translateY(-50%);
+  background-color: #ffffffcc;
+  border: none;
+  width: 40px;
+  height: 40px;
+  font-size: 24px;
+  color: #5287e5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 50%;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  transition: background-color 0.2s;
+}
+
+.arrow:hover {
+  background-color: #ffffff;
+}
+
+.left-arrow {
+  left: 10px;
+}
+
+.right-arrow {
+  right: 10px;
+}
+a {
+text-decoration: none;
+color: inherit;
+}
+#busqueda {
+  margin-left:85px;
+  padding: 8px 12px 8px 38px; /* Espacio para el icono */
+  width: 250px;
+  font-size: 17px;
+  font-family: "Zen Kurenaido", sans-serif;
+  border: 2px solid #5287e5;
+  border-radius: 20px;
+  outline: none;
+  background: #ffffff url('https://i.ibb.co/Kcf3DVSD/search.png') no-repeat 10px center;
+  background-size: 13px;
+  transition: all 0.3s ease;
+}
+
+#busqueda:focus {
+  border-color: #3366cc;
+  box-shadow: 0 0 8px rgba(82, 135, 229, 0.4);
+}
+/* ------------------------------ */
+/* ESTILOS PARA CELULAR       */
+/* ------------------------------ */
+@media (max-width: 600px) {
+
+  body {
+    padding: 0;
+    margin: 0;
+  }
+
+  /* El cuadro blanco gigante */
+  .mobile-box {
+    width: 90% !important; 
+    margin-left: 5% !important; 
+    margin-top: 20px !important;
+    height: auto !important;
+    padding-bottom: 30px;
+    border-radius: 15px;
+  }
+
+  /* Contenedor de la imagen de encabezado en Móvil */
+  .header-container {
+      width: 100% !important; 
+      height: 160px !important; 
+      margin: 0 auto !important;
+      overflow: hidden !important; 
+  }
+
+  h1 {
+    text-align: center !important;
+    margin-left: 0 !important;
+  }
+
+  /* Imagen header - ZOOM Y MOVIMIENTO APLICADOS */
+  .header-container img { 
+    width: 100% !important; 
+    height: 100% !important; 
+    object-fit: cover; 
+    object-position: 0 -20%; 
+    
+    /* APLICACIÓN DEL ZOOM Y EL MOVIMIENTO (10% A LA DERECHA) */
+    transform: scale(1.5) translateX(-15%) !important; 
+  }
+  
+  /* Carrusel */
+  .carousel-container {
+    width: 100% !important;
+    height: 180px !important;
+    margin-left: 0 !important;
+  }
+
+  .carousel-track img {
+    width: 160px !important;
+    margin-left: 10px !important;
+    margin-top: 15px !important;
+  }
+
+  .arrow {
+    display: none;
+  }
+
+  /* Buscador */
+  #busqueda {
+    width: 70% !important;
+    margin-left: 15% !important;
+  }
+
+  /* Lista */
+  #lista h1 {
+    font-size: 18px !important;
+    margin-left: 10px !important;
+  }
+
+}
+</style>
+
+<div class="mobile-box" style="background-color: #ffffff;border-radius:20px">
+  <br>
+  <h1 style="margin-left:350px;color:#5287e5">ラブライブの歌詞!</h1>
+
+  <div class="header-container">
+    <img class="header-img" src="https://i.idol.st/u/sif2/card/art/2x/407UR-Heanna-Sumire-Pure-%E3%81%BE%E3%82%8B%E3%81%A7%E3%83%8F%E3%83%AA%E3%82%A6%E3%83%83%E3%83%89%E3%82%B9%E3%82%BF%E3%83%BC-EXlKKs.png">
+  </div>
+
+  <h1 style="margin-left:85px;font-size:25px;color:#5287e5">音楽家!</h1>
+  <div class="carousel-container">
+    <button class="arrow left-arrow" onclick="scrollCarousel('carouselTrack1', -1)">‹</button>
+    <div class="carousel-track" id="carouselTrack1">
+<a href="liella.html"><img style="margin-left:55px" src="https://i.pinimg.com/1200x/93/0f/40/930f4080e08fa54ebf43b29928dd8c2f.jpg">
+<a href="aqours.html"><img src="https://i.pinimg.com/1200x/f9/61/b3/f961b387a7f6b31dbded49af9d9762fc.jpg"></a>
+<a href="muse.html"><img src="https://i.pinimg.com/1200x/67/91/b4/6791b45262ee69b5b455ec55191350d1.jpg"></a>      
+<a href="ikizu.html"><img src="https://i.pinimg.com/736x/71/c2/e0/71c2e01e6b337ab53664568979f8609f.jpg">
+      <a href="hasu.html"><img src="https://i.ibb.co/Pv6rQmm3/tsuzuri.png">            
+<a href="nijigasaki.html"><img src="https://i.pinimg.com/1200x/0d/20/e7/0d20e7f492f3770335b8d390cd183f2a.jpg"></a>
       </div>
-      <div class="p-3 border-t flex items-center justify-between gap-2">
-        <div class="min-w-0">
-          <div id="now-title" class="font-semibold truncate">Sin reproducción</div>
-        </div>
-        <div class="flex items-center gap-2">
-          <button id="prev" class="px-3 py-2 rounded-xl border hover:bg-slate-50">←</button>
-          <button id="next" class="px-3 py-2 rounded-xl border hover:bg-slate-50">→</button>
-          <button id="shuffle" class="px-3 py-2 rounded-xl border hover:bg-slate-50">⇄</button>
-          <button id="loop" class="px-3 py-2 rounded-xl border hover:bg-slate-50">⟳</button>
-          <label class="text-xs flex items-center gap-1 px-2 py-2 rounded-xl border hover:bg-slate-50 cursor-pointer">
-            <input id="autonext" type="checkbox" class="accent-indigo-600" /> Autonext
-          </label>
-        </div>
-      </div>
-    </section>
+    <button class="arrow right-arrow" onclick="scrollCarousel('carouselTrack1', 1)">›</button>
+  </div>
+  <h1 style="margin-left:85px;font-size:25px;color:#5287e5;">リスト!</h1>
+<div>
 
-    <!-- Lista -->
-    <section class="lg:col-span-5 bg-white rounded-2xl shadow border overflow-hidden flex flex-col">
-      <div class="p-3 border-b flex items-center justify-between gap-2">
-        <div class="flex items-center gap-2">
-          <label for="playlist" class="font-semibold">Playlist:</label>
-          <select id="playlist" class="px-2 py-1 rounded-lg border text-sm"></select>
-          <button id="btn-new" class="px-2 py-1 rounded-lg border text-xs hover:bg-slate-50">Nueva</button>
-          <button class="px-2 py-1 rounded-lg border text-xs hover:bg-slate-50" id="btnExport">Exportar</button>
-          <input type="file" id="btnImport" accept=".json" style="display:none;">
-          <label for="btnImport" class="px-2 py-1 rounded-lg border text-xs hover:bg-slate-50" style="cursor:pointer;">Importar</label>       
-        </div>
-      </div>
-      <div id="list" class="flex-1 overflow-auto max-h-96 divide-y no-scrollbar"></div>
-    </section>
-  </main>
+  <input 
+    type="text" 
+    id="busqueda" 
+    placeholder="検索..." 
+    style="padding-left:30px;"
+  >
 
-  <footer class="mt-8 text-center text-xs text-slate-400">
-   <p><a href"prueba.html">prueba</a></p>
-    Reproduce enlaces directos de video en formato MP4
-  </footer>
+  <div id="lista">
+    <h1 alt="asakusa guilty girl no uta" style="margin-left:85px;font-size:20px;color:#5287e5;">✦ <a href="asakusa_guilty_girl_no_uta.html"><u>浅草Guilty Girlの歌</u></a></h1>
+    <h1 alt="nonfiction" style="margin-left:85px;font-size:20px;color:#5287e5;">✦ <a href="nonfiction_starlight_prologue.html"><u>ノンフィクション!!</u></a></h1>
+    <h1 alt="starlight prologue" style="margin-left:85px;font-size:20px;color:#5287e5;">✦ <a href="nonfiction_starlight_prologue.html"><u>Starlight Prologue</u></a></h1>
+  </div>
 </div>
+<script src="https://unpkg.com/kuroshiro/dist/kuroshiro.min.js"></script>
+<script src="https://unpkg.com/kuroshiro-analyzer-kuromoji/dist/kuroshiro-analyzer-kuromoji.min.js"></script>
 
-<!-- Script -->
 <script>
-const STORAGE = "playlistsV3";
-let state = { playlists:{}, active:null };
-
-const elPlayer=document.getElementById("player");
-const elNow=document.getElementById("now-title");
-const elList=document.getElementById("list");
-const elSelect=document.getElementById("playlist");
-
-// Evento autonext: cuando termina un video
-elPlayer.onended = () => {
-  const pl = currentPl();
-  if(!pl.autonext) return;
-  if(pl.loop) return play(pl.current);
-  next();
+const scrollIndexes = {
+  carouselTrack1: 0,
+  carouselTrack2: 0
 };
 
-function save(){ localStorage.setItem(STORAGE, JSON.stringify(state)); }
-function load(){
-  const s = JSON.parse(localStorage.getItem(STORAGE)||"{}");
-  if(s.playlists) state.playlists = s.playlists;
-  if(s.active) state.active = s.active;
-  if(!state.active || !state.playlists[state.active]){
-    state.playlists = { "All":{list:[],current:-1,shuffle:false,loop:false,autonext:true} };
-    state.active = "All";
-  }
-}
-function currentPl(){ return state.playlists[state.active]; }
-function rebuildAll(){
-  let all = [];
-  for(const [name,pl] of Object.entries(state.playlists)){
-    if(name==="All") continue;
-    all.push(...pl.list);
-  }
-  state.playlists["All"].list = all;
-  if(all.length && state.playlists["All"].current===-1) state.playlists["All"].current=0;
+// Se ajusta el cálculo del ancho de la tarjeta para móvil si es necesario
+const isMobile = window.matchMedia("(max-width: 600px)").matches;
+const cardWidth = isMobile ? (160 + 10) : (240 + 50); // imagen width + margin-left
+
+function scrollCarousel(trackId, direction) {
+  const track = document.getElementById(trackId);
+  const maxScroll = track.children.length - (isMobile ? 2 : 3); // 2 o 3 imágenes visibles
+  scrollIndexes[trackId] += direction;
+
+  if (scrollIndexes[trackId] < 0) scrollIndexes[trackId] = 0;
+  if (scrollIndexes[trackId] > maxScroll) scrollIndexes[trackId] = maxScroll;
+
+  track.style.transform = `translateX(-${scrollIndexes[trackId] * cardWidth}px)`;
 }
 
-function renderSelect(){
-  elSelect.innerHTML="";
-  Object.keys(state.playlists).forEach(name=>{
-    let opt=document.createElement("option");
-    opt.value=name; opt.textContent=name;
-    if(name===state.active) opt.selected=true;
-    elSelect.appendChild(opt);
-  });
-}
-function renderList(filter=null){
-  const pl=currentPl();
-  elList.innerHTML="";
-  const arr=filter||pl.list;
-  if(!arr.length){
-    elList.innerHTML='<div class="p-6 text-center text-slate-400">Playlist vacía 👆</div>';
-    return;
-  }
-  arr.forEach((item,i)=>{
-    const idx=pl.list.indexOf(item);
-    let row=document.createElement("div");
-    row.className="p-3 flex items-center gap-2 hover:bg-slate-50 cursor-grab";
-    if(idx===pl.current) row.classList.add("bg-indigo-50");
-    row.innerHTML=`
-      <div class="w-6 text-xs text-center text-slate-500">${idx+1}</div>
-      <div class="flex-1 min-w-0"><div class="font-medium truncate">${item.title||"Video "+(idx+1)}</div></div>
-      <button class="px-2 py-1 rounded-lg border text-xs hover:bg-slate-50">▷</button>
-      <button class="px-2 py-1 rounded-lg border text-xs hover:bg-slate-50">✖︎</button>`;
-    row.children[2].onclick=()=>play(idx);
-    row.children[3].onclick=()=>remove(idx);
-    elList.appendChild(row);
-  });
-  new Sortable(elList,{animation:150,onEnd:evt=>{
-      const pl=currentPl();
-      const mv=pl.list.splice(evt.oldIndex,1)[0];
-      pl.list.splice(evt.newIndex,0,mv);
-      if(pl.current===evt.oldIndex) pl.current=evt.newIndex;
-      save(); render();
-  }});
-}
-function renderPlayer(){
-  const pl=currentPl();
-  const v=pl.list[pl.current];
-  if(!v){ elPlayer.src=""; elNow.textContent="Sin reproducción"; return; }
-  elPlayer.src=v.url;
-  elNow.textContent=v.title||"Reproduciendo";
-}
-function render(){
-  rebuildAll();
-  renderSelect(); renderList(); renderPlayer();
-  document.getElementById("autonext").checked=currentPl().autonext;
-  document.getElementById("shuffle").classList.toggle("bg-slate-200",currentPl().shuffle);
-  document.getElementById("loop").classList.toggle("bg-slate-200",currentPl().loop);
-}
+document.getElementById("busqueda").addEventListener("input", function () {
+  const filtro = this.value.trim().toLowerCase();
+  const elementos = document.querySelectorAll("#lista h1");
 
-/* acciones */
-function add(){
-  const url=document.getElementById("input-url").value.trim();
-  const title=document.getElementById("input-title").value.trim();
-  if(!url) return alert("Enlace inválido");
-  currentPl().list.push({url,title});
-  if(currentPl().current===-1) currentPl().current=0;
-  document.getElementById("input-url").value="";
-  document.getElementById("input-title").value="";
-  save(); render();
-}
-function remove(idx){
-  const pl=currentPl();
-  pl.list.splice(idx,1);
-  if(pl.current>=pl.list.length) pl.current=pl.list.length-1;
-  save(); render();
-}
-function play(idx){ currentPl().current=idx; save(); render(); }
-function next(){
-  const pl=currentPl(); if(!pl.list.length) return;
-  if(pl.loop) return play(pl.current);
-  play((pl.current+1)%pl.list.length);
-}
-function prev(){
-  const pl=currentPl(); if(!pl.list.length) return;
-  play((pl.current-1+pl.list.length)%pl.list.length);
-}
-function toggleShuffle(){
-  const pl=currentPl(); pl.shuffle=!pl.shuffle;
-  if(pl.shuffle) pl.list=pl.list.sort(()=>Math.random()-0.5);
-  save(); render();
-}
+  elementos.forEach(h1 => {
+    const alt = (h1.getAttribute("alt") || "").toLowerCase();
 
-/* eventos */
-document.getElementById("btn-add").onclick=add;
-document.getElementById("prev").onclick=prev;
-document.getElementById("next").onclick=next;
-document.getElementById("shuffle").onclick=toggleShuffle;
-document.getElementById("loop").onclick=()=>{ currentPl().loop=!currentPl().loop; save(); render(); };
-document.getElementById("autonext").onchange=e=>{ currentPl().autonext=e.target.checked; save(); };
-elSelect.onchange=()=>{ state.active=elSelect.value; save(); render(); };
-document.getElementById("btn-new").onclick=()=>{
-  const name=prompt("Nombre de la playlist:");
-  if(!name) return;
-  if(state.playlists[name]) return alert("Ya existe");
-  state.playlists[name]={list:[],current:-1,shuffle:false,loop:false,autonext:true};
-  state.active=name; save(); render();
-};
-document.getElementById("search").oninput=e=>{
-  const q=e.target.value.toLowerCase();
-  const pl=currentPl();
-  const f=pl.list.filter(v=>(v.title||"").toLowerCase().includes(q));
-  renderList(f);
-};
-
-/* Export / Import */
-function exportData(){
-  const dataStr = JSON.stringify(state.playlists, null, 2);
-  const blob = new Blob([dataStr], {type: "application/json"});
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = "mis_playlists.json";
-  a.click();
-  URL.revokeObjectURL(url);
-}
-function importData(file){
-  const reader = new FileReader();
-  reader.onload = e => {
-    try {
-      const imported = JSON.parse(e.target.result);
-      state.playlists = imported;
-      save();
-      render();
-      alert("✅ Playlists importadas correctamente");
-    } catch(err){
-      alert("❌ Archivo inválido");
+    // Mostrar solo si empieza con el texto buscado
+    if (alt.startsWith(filtro) || filtro === "") {
+      h1.style.display = "";
+    } else {
+      h1.style.display = "none";
     }
-  };
-  reader.readAsText(file);
-}
-document.getElementById("btnExport").addEventListener("click", exportData);
-document.getElementById("btnImport").addEventListener("change", e => {
-  if(e.target.files[0]) importData(e.target.files[0]);
+  });
 });
-
-/* inicio */
-load(); render();
 </script>
 </body>
 </html>
-
-
