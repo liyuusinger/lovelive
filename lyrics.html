@@ -59,27 +59,13 @@ p {
 .carousel-track {
   display: flex;
   transition: transform 0.3s ease;
-  
-  /* NUEVO: PROPIEDADES PARA EL ARRASTRE TÁCTIL (MÓVIL) */
-  overflow-x: auto; /* Habilita el desplazamiento horizontal nativo */
-  -webkit-overflow-scrolling: touch; /* Suaviza el desplazamiento en iOS */
-  scroll-snap-type: x mandatory; /* Ayuda a que se detenga en cada imagen */
-  scrollbar-width: none; /* Oculta la barra de desplazamiento en Firefox */
 }
-
-/* NUEVO: Oculta la barra de desplazamiento en Chrome/Safari */
-.carousel-track::-webkit-scrollbar {
-  display: none;
-}
-
-
 .carousel-container img {
   width: 240px;
   border-radius: 2px;
   margin-top: 20px;
-  margin-left: 50px; /* Margen estándar de 50px */
+  margin-left: 50px;
   flex-shrink: 0;
-  scroll-snap-align: start; /* Asegura que la imagen se detenga al inicio */
 }
 
 .arrow {
@@ -185,6 +171,21 @@ color: inherit;
     height: 180px !important;
     margin-left: 0 !important;
   }
+.carousel-track {
+  display: flex;
+  transition: transform 0.3s ease;
+  
+  /* NUEVO: PROPIEDADES PARA EL ARRASTRE TÁCTIL (MÓVIL) */
+  overflow-x: auto; /* Habilita el desplazamiento horizontal nativo */
+  -webkit-overflow-scrolling: touch; /* Suaviza el desplazamiento en iOS */
+  scroll-snap-type: x mandatory; /* Ayuda a que se detenga en cada imagen */
+  scrollbar-width: none; /* Oculta la barra de desplazamiento en Firefox */
+}
+
+/* NUEVO: Oculta la barra de desplazamiento en Chrome/Safari */
+.carousel-track::-webkit-scrollbar {
+  display: none;
+}
 
   .carousel-track img {
     width: 160px !important;
