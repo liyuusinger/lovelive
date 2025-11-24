@@ -1,0 +1,194 @@
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kurenaido&display=swap" rel="stylesheet">
+
+<title>いきづらい部！</title>
+<meta charset="UTF-8">
+
+<style>
+body {
+  background-color: #7f5a51;
+  font-family: "Zen Kurenaido", sans-serif;
+  margin: 0;
+}
+
+/* ----- Contenedor general ----- */
+.main-box {
+  width: 95%;
+  max-width: 1000px;
+  background-color: #ffffff;
+  margin: 80px auto;
+  border-radius: 20px;
+  padding-bottom: 20px;
+}
+
+/* ----- Header con flecha ----- */
+.header-title {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  padding: 10px 0;
+}
+
+.back-btn {
+  color: #7f5a51;
+  border: none;
+  background-color: white;
+  font-size: 35px;
+  position: absolute;
+  left: 15px;
+}
+
+.header-title h1 {
+  flex: 1;
+  text-align: center;
+  color: #7f5a51;
+  margin: 0;
+}
+
+/* ----- Imagen principal ----- */
+.hero-img-container {
+  width: 100%;
+  height: 170px;
+  overflow: hidden;
+}
+
+.hero-img-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 0 55%;
+}
+
+/* ----- Carousel ----- */
+.carousel-container {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  margin-top: 10px;
+}
+
+.carousel-track {
+  display: flex;
+  transition: transform 0.3s ease;
+  
+  /* PROPIEDADES CLAVE PARA EL DESPLAZAMIENTO TÁCTIL */
+  overflow-x: auto; /* Permite el desplazamiento horizontal */
+  -webkit-overflow-scrolling: touch; /* Hace que el desplazamiento sea suave en iOS */
+  scroll-snap-type: x mandatory; /* Opcional: Ayuda a que se detenga justo en cada imagen */
+  
+  /* Oculta la barra de desplazamiento que se puede generar, si no la deseas */
+  scrollbar-width: none; /* Para Firefox */
+}
+
+/* Ocultar la barra de desplazamiento para navegadores basados en WebKit (Chrome, Safari) */
+.carousel-track::-webkit-scrollbar {
+  display: none;
+}
+
+.carousel-container img {
+  width: 180px;
+  margin: 10px;
+  border-radius: 5px;
+  flex-shrink: 0;
+}
+
+/* Flechas */
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #ffffffcc;
+  border: none;
+  width: 35px;
+  height: 35px;
+  font-size: 24px;
+  color: #7f5a51;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 50%;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 2;
+}
+
+.left-arrow { left: 5px; }
+.right-arrow { right: 5px; }
+
+/* ----- RESPONSIVE ----- */
+@media (max-width: 600px) {
+  .main-box { margin-top: 40px; }
+
+  .carousel-container img {
+    width: 150px;
+    margin: 8px;
+  }
+
+  h1 { font-size: 22px; }
+  .arrow {
+      display: none;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="main-box">
+
+  <div class="header-title">
+    <button class="back-btn">
+      <a href="lyrics.html" style="text-decoration: none; color: #7f5a51;">‹</a>
+    </button>
+    <h1>いきづらい部！</h1>
+  </div>
+
+  <div class="hero-img-container">
+    <img src="https://www.lisani.jp/admin/wp-content/uploads/2025/07/2507122100-ak-011-1600x1067.jpg">
+  </div>
+
+  <h1 style="margin-left:20px;font-size:20px;color:#7f5a51">ＥＰレコード!</h1>
+
+  <div class="carousel-container">
+    <button class="arrow left-arrow" onclick="scrollCarousel('carouselTrack1', -1)">‹</button>
+
+    <div class="carousel-track" id="carouselTrack1">
+      <a href="aspire.html"><img src="https://static.wikia.nocookie.net/love-live/images/5/53/Ikizurai-Bu%21_What_is_my_LIFE%3F.jpg/revision/latest?cb=20250512111728"></a>
+      <a href="asakusa_guilty_girl_no_uta.html"><img src="https://static.wikia.nocookie.net/love-live/images/5/55/Polka_Takahashi_Asakusa_Guilty_Girl_no_Uta.jpg/revision/latest?cb=20250621035638"></a>
+      <a href="jump_into_the_new_world.html"><img src="https://static.wikia.nocookie.net/love-live/images/1/1f/Mai_Azabu_Public_Style.jpg/revision/latest?cb=20250625121421"></a>
+      <a href="second_sparkle.html"><img src="https://static.wikia.nocookie.net/love-live/images/e/eb/Akira_Goto_Itsuka-Ao.jpg/revision/latest?cb=20250701111133"></a>
+      <a href="what_a_wonderful_dream.html"><img src="https://static.wikia.nocookie.net/love-live/images/1/16/Hanabi_Komagata_HIBANA_-Hibana-.jpg/revision/latest?cb=20250708110849"></a>
+      <a href="what_a_wonderful_dream.html"><img src="https://static.wikia.nocookie.net/love-live/images/1/18/Yukuri_Harumiya_Pray_for_love.jpg/revision/latest?cb=20250715111044"></a>
+      <a href="what_a_wonderful_dream.html"><img src="https://static.wikia.nocookie.net/love-live/images/f/fb/Aurora_Konohana_Kimi_wa_Yoru_no_Polaris.jpg/revision/latest?cb=20250729110936"></a>
+      <a href="what_a_wonderful_dream.html"><img src="https://static.wikia.nocookie.net/love-live/images/d/d0/Midori_Yamada_Little_Green_Iinkai.jpg/revision/latest?cb=20250731110726"></a>
+    </div>
+
+    <button class="arrow right-arrow" onclick="scrollCarousel('carouselTrack1', 1)">›</button>
+  </div>
+
+</div>
+
+<script>
+const scrollIndexes = { carouselTrack1: 0 };
+const cardWidth = 170; // ancho estimado en mobile
+
+function scrollCarousel(trackId, direction) {
+  const track = document.getElementById(trackId);
+  const maxScroll = track.children.length - 2;
+  scrollIndexes[trackId] += direction;
+
+  if (scrollIndexes[trackId] < 0) scrollIndexes[trackId] = 0;
+  if (scrollIndexes[trackId] > maxScroll) scrollIndexes[trackId] = maxScroll;
+
+  track.style.transform = `translateX(-${scrollIndexes[trackId] * cardWidth}px)`;
+}
+</script>
+
+</body>
+</html>
