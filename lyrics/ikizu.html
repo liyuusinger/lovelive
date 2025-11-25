@@ -1,96 +1,66 @@
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Zen+Kurenaido&display=swap" rel="stylesheet">
-
-<title>いきづらい部！</title>
+<link rel="icon" type="image/x-icon" href="https://i.ibb.co/d49mP7R6/Proyecto-nuevo-3.png">
 <meta charset="UTF-8">
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>いきづらい部！</title>
+</head>
+<body>
 <style>
 body {
   background-color: #7f5a51;
   font-family: "Zen Kurenaido", sans-serif;
-  margin: 0;
 }
-
-/* ----- Contenedor general ----- */
-.main-box {
-  width: 95%;
-  max-width: 1000px;
+p {
+ font-family: "Zen Kurenaido", sans-serif;
+}
+/* ------------------------------ */
+/* ESTILOS DE ESCRITORIO (POR DEFECTO)      */
+/* ------------------------------ */
+.mobile-box {
+  width: 1000px; /* Ancho para escritorio */
+  height: auto; /* Altura para escritorio */
+  margin-left: 160px; /* Margen para posicionamiento en escritorio */
+  margin-top: 100px;
   background-color: #ffffff;
-  margin: 80px auto;
   border-radius: 20px;
   padding-bottom: 20px;
 }
 
-/* ----- Header con flecha ----- */
-.header-title {
-  display: flex;
-  align-items: center;
-  position: relative;
-  width: 100%;
-  padding: 10px 0;
+/* Estilo para el contenedor de la imagen de encabezado en Escritorio */
+.header-container {
+    width: 1000px;
+    height: 200px; 
+    overflow: hidden;
+    margin: 0 auto;
 }
 
-.back-btn {
-  color: #7f5a51;
-  border: none;
-  background-color: white;
-  font-size: 35px;
-  position: absolute;
-  left: 15px;
+/* La imagen dentro del contenedor de encabezado para escritorio */
+.header-container img {
+    width: 100%; 
+    height: 100%;
+    object-fit: cover; 
+    object-position: 0 55%;
 }
 
-.header-title h1 {
-  flex: 1;
-  text-align: center;
-  color: #7f5a51;
-  margin: 0;
-}
 
-/* ----- Imagen principal ----- */
-.hero-img-container {
-  width: 100%;
-  height: 170px;
-  overflow: hidden;
-}
-
-.hero-img-container img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: 0 55%;
-}
-
-/* ----- Carousel ----- */
 .carousel-container {
-  width: 100%;
+  width: 930px;
+  height: 280px;
+  margin-left:40px;
+  border-radius: 5px;
   overflow: hidden;
   position: relative;
-  margin-top: 10px;
+  
 }
 
 .carousel-track {
   display: flex;
   transition: transform 0.3s ease;
-  
-  /* PROPIEDADES CLAVE PARA EL DESPLAZAMIENTO TÁCTIL */
-  overflow-x: auto; /* Permite el desplazamiento horizontal */
-  -webkit-overflow-scrolling: touch; /* Hace que el desplazamiento sea suave en iOS */
-  scroll-snap-type: x mandatory; /* Opcional: Ayuda a que se detenga justo en cada imagen */
-  
-  /* Oculta la barra de desplazamiento que se puede generar, si no la deseas */
-  scrollbar-width: none; /* Para Firefox */
 }
-
-/* Ocultar la barra de desplazamiento para navegadores basados en WebKit (Chrome, Safari) */
-.carousel-track::-webkit-scrollbar {
-  display: none;
-}
-
 .carousel-container img {
   width: 240px;
   border-radius: 2px;
@@ -98,15 +68,15 @@ body {
   margin-left: 50px;
   flex-shrink: 0;
 }
-/* Flechas */
+
 .arrow {
   position: absolute;
-  top: 50%;
+  top: 45%;
   transform: translateY(-50%);
   background-color: #ffffffcc;
   border: none;
-  width: 35px;
-  height: 35px;
+  width: 40px;
+  height: 40px;
   font-size: 24px;
   color: #7f5a51;
   display: flex;
@@ -115,72 +85,185 @@ body {
   cursor: pointer;
   border-radius: 50%;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  z-index: 2;
+  z-index: 1;
+  transition: background-color 0.2s;
 }
 
-.left-arrow { left: 5px; }
-.right-arrow { right: 5px; }
+.arrow:hover {
+  background-color: #ffffff;
+}
 
-/* ----- RESPONSIVE ----- */
+.left-arrow {
+  left: 10px;
+}
+
+.right-arrow {
+  right: 10px;
+}
+a {
+text-decoration: none;
+color: inherit;
+}
+#busqueda {
+  margin-left:85px;
+  padding: 8px 12px 8px 38px; /* Espacio para el icono */
+  width: 250px;
+  font-size: 17px;
+  font-family: "Zen Kurenaido", sans-serif;
+  border: 2px solid #5287e5;
+  border-radius: 20px;
+  outline: none;
+  background: #ffffff url('https://i.ibb.co/Kcf3DVSD/search.png') no-repeat 10px center;
+  background-size: 13px;
+  transition: all 0.3s ease;
+}
+
+#busqueda:focus {
+  border-color: #3366cc;
+  box-shadow: 0 0 8px rgba(82, 135, 229, 0.4);
+}
+/* ------------------------------ */
+/* ESTILOS PARA CELULAR       */
+/* ------------------------------ */
 @media (max-width: 600px) {
-  .main-box { margin-top: 40px; }
 
-  .carousel-container img {
-    width: 150px;
-    margin: 8px;
+  body {
+    padding: 0;
+    margin: 0;
   }
 
-  h1 { font-size: 22px; }
+  /* El cuadro blanco gigante */
+  .mobile-box {
+    width: 90% !important; 
+    margin-left: 5% !important; 
+    margin-top: 20px !important;
+    height: auto !important;
+    padding-bottom: 30px;
+    border-radius: 15px;
+  }
+
+  /* Contenedor de la imagen de encabezado en Móvil */
+  .header-container {
+      width: 100% !important; 
+      height: 160px !important; 
+      margin: 0 auto !important;
+      overflow: hidden !important; 
+  }
+
+  h1 {
+    text-align: center !important;
+    margin-left: 0 !important;
+  }
+
+  /* Imagen header - ZOOM Y MOVIMIENTO APLICADOS */
+  .header-container img { 
+    width: 100% !important; 
+    height: 100% !important; 
+    object-fit: cover; 
+    object-position: 0 -20%; 
+    
+    /* PROPIEDAD DE ZOOM LITERAL */
+    transform: scale(1.5) translateX(-15%) !important; 
+  }
+  
+  /* Carrusel */
+  .carousel-container {
+    width: 100% !important;
+    height: 180px !important;
+    margin-left: 0 !important;
+  }
+.carousel-track {
+  display: flex;
+  transition: transform 0.3s ease;
+  
+  /* NUEVO: PROPIEDADES PARA EL ARRASTRE TÁCTIL (MÓVIL) */
+  overflow-x: auto; /* Habilita el desplazamiento horizontal nativo */
+  -webkit-overflow-scrolling: touch; /* Suaviza el desplazamiento en iOS */
+  scroll-snap-type: x mandatory; /* Ayuda a que se detenga en cada imagen */
+  scrollbar-width: none; /* Oculta la barra de desplazamiento en Firefox */
+}
+
+/* NUEVO: Oculta la barra de desplazamiento en Chrome/Safari */
+.carousel-track::-webkit-scrollbar {
+  display: none;
+}
+
+  .carousel-track img {
+    width: 160px !important;
+    margin-left: 10px !important;
+    margin-top: 15px !important;
+  }
+
   .arrow {
-      display: none;
+    display: none !important;
   }
+
+  /* Buscador */
+  #busqueda {
+    width: 70% !important;
+    margin-left: 15% !important;
+  }
+
+  /* Lista */
+  #lista h1 {
+    font-size: 18px !important;
+    margin-left: 10px !important;
+  }
+
 }
 </style>
-</head>
 
-<body>
-
-<div class="main-box">
-
-  <div class="header-title">
-    <button class="back-btn">
-      <a href="../lyrics.html" style="text-decoration: none; color: #7f5a51;">‹</a>
+<div class="mobile-box" style="background-color: #ffffff;border-radius:20px">
+  <br>
+  <div style="position: relative; width: 100%;">
+    <button 
+      style="color:#7f5a51;
+             border:0;
+             background-color:white;
+             font-size:35px;
+             position:absolute;
+             left:10px;
+             top:0;
+             cursor:pointer;">
+      <a href="../lyrics.html" style="text-decoration:none; color:#7f5a51;">‹</a>
     </button>
-    <h1>いきづらい部！</h1>
+    <h1 style="color:#7f5a51; text-align:center; margin:0;">いきづらい部！</h1>
+
+  </div>
+<br>
+  <div class="header-container">
+    <img class="header-img" src="https://www.lisani.jp/admin/wp-content/uploads/2025/07/2507122100-ak-011-1600x1067.jpg">
   </div>
 
-  <div class="hero-img-container">
-    <img src="https://www.lisani.jp/admin/wp-content/uploads/2025/07/2507122100-ak-011-1600x1067.jpg">
-  </div>
-
-  <h1 style="margin-left:20px;font-size:20px;color:#7f5a51">ＥＰレコード!</h1>
-
+  <h1 style="margin-left:85px;font-size:25px;color:#7f5a51">ＥＰレコード!</h1>
   <div class="carousel-container">
     <button class="arrow left-arrow" onclick="scrollCarousel('carouselTrack1', -1)">‹</button>
-
     <div class="carousel-track" id="carouselTrack1">
-      <a href="aspire.html"><img src="https://st.cdjapan.co.jp/pictures/x/04/14/LACM-34705.jpg?v=1"></a>
-      <a href="asakusa_guilty_girl_no_uta.html"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/4f/01/b0/4f01b02d-b76b-e1c1-077c-def3252811dd/4540774745616.png/3000x3000bb.jpg"></a>
-      <a href="jump_into_the_new_world.html"><img src="https://wiki.schoolidol.net/w/images/5/5a/Itsuka_Ao.jpg"></a>
-      <a href="second_sparkle.html"><img src="https://static.wikia.nocookie.net/love-live/images/e/eb/Akira_Goto_Itsuka-Ao.jpg/revision/latest?cb=20250701111133"></a>
-      <a href="what_a_wonderful_dream.html"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/b8/08/58/b8085887-4abd-2c99-7567-3ca255973115/4540774745692.png/3000x3000bb.jpg"></a>
-      <a href="what_a_wonderful_dream.html"><img src="https://static.wikia.nocookie.net/love-live/images/1/18/Yukuri_Harumiya_Pray_for_love.jpg/revision/latest?cb=20250715111044"></a>
-      <a href="what_a_wonderful_dream.html"><img src="https://static.wikia.nocookie.net/love-live/images/f/fb/Aurora_Konohana_Kimi_wa_Yoru_no_Polaris.jpg/revision/latest?cb=20250729110936"></a>
-      <a href="what_a_wonderful_dream.html"><img src="https://static.wikia.nocookie.net/love-live/images/d/d0/Midori_Yamada_Little_Green_Iinkai.jpg/revision/latest?cb=20250731110726"></a>
+      <a href="liella.html"><img src="https://st.cdjapan.co.jp/pictures/x/04/14/LACM-34705.jpg?v=1"></a>
+      <a href="aqours.html"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/4f/01/b0/4f01b02d-b76b-e1c1-077c-def3252811dd/4540774745616.png/3000x3000bb.jpg"></a>
+      <a href="muse.html"><img src="https://i.redd.it/bmbsz8w1709f1.jpeg"></a>      
+      <a href="ikizu.html"><img src="https://wiki.schoolidol.net/w/images/5/5a/Itsuka_Ao.jpg"></a>
+      <a href="hasu.html"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/b8/08/58/b8085887-4abd-2c99-7567-3ca255973115/4540774745692.png/3000x3000bb.jpg"></a>            
+      <a href="nijigasaki.html"><img src="https://preview.redd.it/yukuris-1st-solo-single-art-and-lyric-video-english-subs-v0-s7m7od2st0df1.jpeg?auto=webp&s=a8e8715d1f74acb8c8b96feeea84d2f5dd431c02"></a>
     </div>
-
     <button class="arrow right-arrow" onclick="scrollCarousel('carouselTrack1', 1)">›</button>
+
   </div>
 
-</div>
-
 <script>
-const scrollIndexes = { carouselTrack1: 0 };
-const cardWidth = 170; // ancho estimado en mobile
+const scrollIndexes = {
+  carouselTrack1: 0,
+  carouselTrack2: 0
+};
+
+// Se ajusta el cálculo del ancho de la tarjeta para móvil si es necesario
+const isMobile = window.matchMedia("(max-width: 600px)").matches;
+// El ancho de la tarjeta es consistente: 240px (imagen) + 50px (margen) = 290px en desktop
+const cardWidth = isMobile ? (160 + 10) : (240 + 50); 
 
 function scrollCarousel(trackId, direction) {
   const track = document.getElementById(trackId);
-  const maxScroll = track.children.length - 2;
+  const maxScroll = track.children.length - (isMobile ? 2 : 3); // 2 o 3 imágenes visibles
   scrollIndexes[trackId] += direction;
 
   if (scrollIndexes[trackId] < 0) scrollIndexes[trackId] = 0;
@@ -188,7 +271,7 @@ function scrollCarousel(trackId, direction) {
 
   track.style.transform = `translateX(-${scrollIndexes[trackId] * cardWidth}px)`;
 }
-</script>
 
+</script>
 </body>
 </html>
