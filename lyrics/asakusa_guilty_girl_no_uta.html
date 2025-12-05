@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" type="image/x-icon" href="../pluma.png">
 <link href="https://fonts.googleapis.com/css2?family=Zen+Kurenaido&display=swap" rel="stylesheet">
 <title>浅草Guilty Girlの歌</title>
 <style>
@@ -193,7 +192,7 @@ transition: background-color 0.4s, color 0.4s; /* transición suave */
   margin: 0;
   font-size: 15px;          /* MISMO tamaño para que coincidan */
   color: #ffdd3c;           /* amarillo */
-  text-align: center;       /* centradas */
+  text-align: left;       /* centradas */
 }
 .bloque {
   margin-bottom: 15px;
@@ -202,18 +201,8 @@ transition: background-color 0.4s, color 0.4s; /* transición suave */
 .traduccion {
   display: block;
   width: 100%;
-  text-align: center;
+  text-align: left;
   box-sizing: border-box;
-}
-
-.traduccion[contenteditable="true"] {
-  border: 1px solid #ffdd3c;
-  border-radius: 8px;
-  padding: 5px;
-  outline: none;
-  width: 80%;
-  text-align: center;   /* CENTRADO */
-  font-size: 18px;      /* MISMO tamaño */
 }
 
 
@@ -221,7 +210,7 @@ transition: background-color 0.4s, color 0.4s; /* transición suave */
   margin: 0;
   font-size: 15px;
   color: #ffdd3c;
-  width: 60%;
+  width: 100%;
   display: inline-block;
   text-align: left;
 }
@@ -260,6 +249,11 @@ transition: background-color 0.4s, color 0.4s; /* transición suave */
   }
 .btn-eliminar-tarjeta:hover {
   background:#ff2222 !important;
+}
+[contenteditable="true"] {
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
 }
 @media (max-width: 600px) {
 
@@ -335,6 +329,9 @@ transition: background-color 0.4s, color 0.4s; /* transición suave */
   .carousel {
       margin-left: 0px !important;
   }
+  .traduccion h1 {
+	text-align: left !important;
+	}
   .flecha {
       margin-left: 0px !important; 
       width: 40px !important;
@@ -352,7 +349,7 @@ transition: background-color 0.4s, color 0.4s; /* transición suave */
   }
   #contenedor {
       
-      width: 350px !important;
+      width: 400px !important;
   }
   .botoneslinea {
       
@@ -407,7 +404,7 @@ transition: background-color 0.4s, color 0.4s; /* transición suave */
 
 <div class="caja">
 <div class="caja1">
-<img class="imagen" style="width:350px; margin-left:30px;height:350px" src="https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/4f/01/b0/4f01b02d-b76b-e1c1-077c-def3252811dd/4540774745616.png/3000x3000bb.jpg">
+<img class="imagen" style="width:350px; margin-left:30px;height:350px" src="https://static.wikia.nocookie.net/love-live/images/5/55/Polka_Takahashi_Asakusa_Guilty_Girl_no_Uta.jpg/revision/latest?cb=20250621035638">
 <div style="display:block">
 <h1 class="parrafo" style="font-size:17px;width:400px;margin-left:40px;">浅草Guilty Girlの歌 (lit. Asakusa Guilty Girl's Song) is Polka Takahashi's 1st solo single that was released on August 27, 2025.<br><br>1. <span style="color:#ffdd3c"><a style="color:#ffdd3c" href="#titulocancion">浅草Guilty Girlの歌</a></span> (lit. Asakusa Guilty Girl's Song)
 <br>2. <span style="color:#ffdd3c">オドルポルカ</span> (lit. Dancing Polka)
@@ -477,6 +474,7 @@ style="margin-top:20px; height:80px; border-radius:12px; width:105px; margin-lef
       <th style="border-right:1px solid white">おんよみ</th>
       <th style="border-right:1px solid white">スパイン語</th>
       <th style="border-right:1px solid white">歌に</th>
+      <th>JLPT</th>
     </tr>
   </thead>
   <tbody>
@@ -585,11 +583,13 @@ function crearBloque(textoLinea,textoTrad,index){
   lineaDiv.className = "linea";
   lineaDiv.innerHTML = convertirATextoHTML(textoLinea);
 
-  lineaDiv.addEventListener("click", () => {
+  lineaDiv.addEventListener("click", (e) => {
+    if (lineaDiv.contentEditable === "true") return;
+
     lineaDiv.contentEditable = "true";
     lineaDiv.innerText = datos[index].linea;
     lineaDiv.focus();
-  });
+});
 
   lineaDiv.addEventListener("keydown", function(e){
     if(e.key === "Enter"){
@@ -623,24 +623,39 @@ function crearBloque(textoLinea,textoTrad,index){
     render();
   };
 
-  const traduccionDiv = document.createElement("div");
-  traduccionDiv.className = "traduccion";
-  traduccionDiv.innerHTML = `<h1>${textoTrad.replace(/ /g, "&nbsp;")}</h1>`;
+ const traduccionDiv = document.createElement("div");
+traduccionDiv.className = "traduccion";
 
-  traduccionDiv.addEventListener("click", () => {
+// mostrar formato amarillo
+traduccionDiv.innerHTML = `<h1 class="trad-texto">${textoTrad}</h1>`;
+
+// al hacer clic, permitir editar SIN resetear el texto
+traduccionDiv.addEventListener("click", () => {
     traduccionDiv.contentEditable = "true";
-    traduccionDiv.innerText = datos[index].traduccion;
-    traduccionDiv.focus();
-  });
+    traduccionDiv.focus();     // deja el cursor EXACTAMENTE donde hiciste click
+});
 
-  traduccionDiv.onblur = function(){
+// al salir, guardar normalmente
+traduccionDiv.addEventListener("blur", () => {
     traduccionDiv.contentEditable = "false";
-    let texto = traduccionDiv.innerText;
-    if(texto.trim() === "") texto = "Traducción "+(index+1);
+
+    const h1 = traduccionDiv.querySelector(".trad-texto");
+    let texto = h1.innerText;
+
+    // si quedó vacío (incluyendo espacios)
+    if (texto.replace(/\s/g, "") === "") {
+        texto = "Traducción " + (index + 1);
+    }
+
     datos[index].traduccion = texto;
-    traduccionDiv.innerHTML = `<h1>${texto.replace(/ /g, "&nbsp;")}</h1>`;
+    h1.innerText = texto;
+
     guardar();
-  };
+});
+
+
+
+
 
   bloque.appendChild(lineaDiv);
   bloque.appendChild(traduccionDiv);
@@ -676,6 +691,7 @@ style="cursor:pointer;border:solid 1px black;width:300px;margin-left:0px;padding
       <h1 class="character" style="font-size:100px;color:#ffdd3c; margin: 0;">浅</h1>
     </div> 
     <div style="margin-left:20px;"> 
+      <h1 style="display:none" class="jlpt">N2</h1>
       <h1 style="font-size:17px; margin: 0;">
         <span class="español" style="box-shadow: inset 0 0em 0 #ffdd3c;">Superficial</span><br>
         くんよみ: <span class="kunyomi" style="color:#ffdd3c; box-shadow: inset 0 0em 0 #ffdd3c;">あさ</span><br>  
@@ -726,12 +742,14 @@ const kunyomiNode = temp.querySelector('.kunyomi');
 const onyomiNode = temp.querySelector('.onyomi');
 const españolNode = temp.querySelector('.español');
 const cancionNode = temp.querySelector('.cancion');
+const jlptNode = temp.querySelector('.jlpt');
 
 const kanji = kanjiNode ? kanjiNode.textContent.trim() : "";
 const kunyomi = kunyomiNode ? kunyomiNode.textContent.trim() : "";
 const onyomi = onyomiNode ? onyomiNode.textContent.trim() : "";
 const español = españolNode ? españolNode.textContent.trim() : "";
 const cancion = cancionNode ? cancionNode.innerHTML.trim() : "";
+const jlpt = jlptNode ? jlptNode.textContent.trim() : "";
 
 
         const row = document.createElement('tr');
@@ -741,6 +759,7 @@ const cancion = cancionNode ? cancionNode.innerHTML.trim() : "";
             <td>${onyomi}</td>
             <td>${español}</td>
             <td>${cancion}</td>
+            <td>${jlpt}</td>
         `;
         tbody.appendChild(row);
     });
@@ -974,7 +993,7 @@ overlay.addEventListener("click", () => {
 </div>
 
 </body>
-
 </html>
+
 
 
