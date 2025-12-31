@@ -704,7 +704,7 @@ style="cursor:pointer;border:solid 1px black;width:300px;margin-left:0px;padding
   <div style="margin-top:10px; text-align:center;"> 
     <h1 style="font-size:16px; margin: 0;">
       <span style="color:#ffdd3c; box-shadow: inset 0 0em 0 #ffdd3c;">✦</span> 
-      <ruby>浅い<rt>あさ</rt></ruby> - Superficial<br>   
+      <ruby>浅<rt>あさ</rt></ruby>い - Superficial<br>   
 
       <span style="color:#ffdd3c; box-shadow: inset 0 0em 0 #ffdd3c;">✦</span> 
       <span class="cancion" style="box-shadow: inset 0 0em 0 #ffdd3c">
@@ -853,14 +853,30 @@ card.addEventListener("blur", (e) => {
   const btn = card.querySelector(".btn-eliminar-tarjeta");
   if (btn) btn.remove();
 
-  // Guardar tarjeta actualizada
-  const htmlLimpio = card.outerHTML
-    .replace(/contenteditable="true"/gi, "")
-    .replace(/contenteditable="false"/gi, "");
-  
-  tarjetas1[indice1] = htmlLimpio;
-  guardarTarjetas();
-  reconstruirTablaKanji();
+// --- NORMALIZAR TARJETA ANTES DE GUARDAR ---
+const clon = card.cloneNode(true);
+
+// asegurar clases clave
+const spans = clon.querySelectorAll("span");
+
+spans.forEach(span => {
+  if (span.textContent.trim() === "") return;
+
+  if (span.closest(".español")) span.className = "español";
+  if (span.closest(".kunyomi")) span.className = "kunyomi";
+  if (span.closest(".onyomi")) span.className = "onyomi";
+  if (span.closest(".cancion")) span.className = "cancion";
+});
+
+// limpiar contenteditable
+clon.querySelectorAll("[contenteditable]").forEach(el => {
+  el.removeAttribute("contenteditable");
+});
+
+tarjetas1[indice1] = clon.outerHTML;
+guardarTarjetas();
+reconstruirTablaKanji();
+
 
 }, { once: true });
 }
@@ -992,4 +1008,3 @@ overlay.addEventListener("click", () => {
 
 </body>
 </html>
-
