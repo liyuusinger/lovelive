@@ -474,7 +474,6 @@ style="margin-top:20px; height:80px; border-radius:12px; width:105px; margin-lef
       <th style="border-right:1px solid white">おんよみ</th>
       <th style="border-right:1px solid white">スパイン語</th>
       <th style="border-right:1px solid white">歌に</th>
-      <th>JLPT</th>
     </tr>
   </thead>
   <tbody>
@@ -639,11 +638,13 @@ h1.addEventListener("click", () => {
 
 
 // al salir, guardar normalmente
-h1.addEventListener("blur", () => {
-    h1.contentEditable = "false";
+traduccionDiv.addEventListener("blur", () => {
+    traduccionDiv.contentEditable = "false";
 
+    const h1 = traduccionDiv.querySelector(".trad-texto");
     let texto = h1.innerText;
 
+    // si quedó vacío (incluyendo espacios)
     if (texto.replace(/\s/g, "") === "") {
         texto = "Traducción " + (index + 1);
     }
@@ -653,7 +654,6 @@ h1.addEventListener("blur", () => {
 
     guardar();
 });
-
 
 
 
@@ -693,7 +693,6 @@ style="cursor:pointer;border:solid 1px black;width:300px;margin-left:0px;padding
       <h1 class="character" style="font-size:100px;color:#ffdd3c; margin: 0;">浅</h1>
     </div> 
     <div style="margin-left:20px;"> 
-      <h1 style="display:none" class="jlpt">N2</h1>
       <h1 style="font-size:17px; margin: 0;">
         <span class="español" style="box-shadow: inset 0 0em 0 #ffdd3c;">Superficial</span><br>
         くんよみ: <span class="kunyomi" style="color:#ffdd3c; box-shadow: inset 0 0em 0 #ffdd3c;">あさ</span><br>  
@@ -744,14 +743,12 @@ const kunyomiNode = temp.querySelector('.kunyomi');
 const onyomiNode = temp.querySelector('.onyomi');
 const españolNode = temp.querySelector('.español');
 const cancionNode = temp.querySelector('.cancion');
-const jlptNode = temp.querySelector('.jlpt');
 
 const kanji = kanjiNode ? kanjiNode.textContent.trim() : "";
 const kunyomi = kunyomiNode ? kunyomiNode.textContent.trim() : "";
 const onyomi = onyomiNode ? onyomiNode.textContent.trim() : "";
 const español = españolNode ? españolNode.textContent.trim() : "";
 const cancion = cancionNode ? cancionNode.innerHTML.trim() : "";
-const jlpt = jlptNode ? jlptNode.textContent.trim() : "";
 
 
         const row = document.createElement('tr');
@@ -761,7 +758,6 @@ const jlpt = jlptNode ? jlptNode.textContent.trim() : "";
             <td>${onyomi}</td>
             <td>${español}</td>
             <td>${cancion}</td>
-            <td>${jlpt}</td>
         `;
         tbody.appendChild(row);
     });
@@ -996,10 +992,4 @@ overlay.addEventListener("click", () => {
 
 </body>
 </html>
-
-
-
-
-
-
 
