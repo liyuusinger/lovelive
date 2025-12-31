@@ -630,19 +630,20 @@ traduccionDiv.className = "traduccion";
 traduccionDiv.innerHTML = `<h1 class="trad-texto">${textoTrad}</h1>`;
 
 // al hacer clic, permitir editar SIN resetear el texto
-traduccionDiv.addEventListener("click", () => {
-    traduccionDiv.contentEditable = "true";
-    traduccionDiv.focus();     // deja el cursor EXACTAMENTE donde hiciste click
+const h1 = traduccionDiv.querySelector(".trad-texto");
+
+h1.addEventListener("click", () => {
+    h1.contentEditable = "true";
+    h1.focus();
 });
 
-// al salir, guardar normalmente
-traduccionDiv.addEventListener("blur", () => {
-    traduccionDiv.contentEditable = "false";
 
-    const h1 = traduccionDiv.querySelector(".trad-texto");
+// al salir, guardar normalmente
+h1.addEventListener("blur", () => {
+    h1.contentEditable = "false";
+
     let texto = h1.innerText;
 
-    // si quedó vacío (incluyendo espacios)
     if (texto.replace(/\s/g, "") === "") {
         texto = "Traducción " + (index + 1);
     }
@@ -652,6 +653,7 @@ traduccionDiv.addEventListener("blur", () => {
 
     guardar();
 });
+
 
 
 
@@ -994,6 +996,10 @@ overlay.addEventListener("click", () => {
 
 </body>
 </html>
+
+
+
+
 
 
 
