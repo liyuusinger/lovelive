@@ -16,6 +16,14 @@ body {
 h1 {
  font-family: "Zen Kurenaido", sans-serif;
 }
+ruby {
+  ruby-align: center; /* comportamiento normal */
+}
+
+/* SOLO cuando el ruby tiene texto inmediatamente después */
+ruby:has(+ :not(rt)):has(+ :not(ruby)) {
+  ruby-align: start;
+}
 a {
 text-decoration: none;
 color: inherit;
@@ -404,7 +412,7 @@ transition: background-color 0.4s, color 0.4s; /* transición suave */
 
 <div class="caja">
 <div class="caja1">
-<img class="imagen" style="width:350px; margin-left:30px;height:350px" src="https://static.wikia.nocookie.net/love-live/images/5/55/Polka_Takahashi_Asakusa_Guilty_Girl_no_Uta.jpg/revision/latest?cb=20250621035638">
+<img class="imagen" style="width:350px; margin-left:30px;height:350px" src="https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/4f/01/b0/4f01b02d-b76b-e1c1-077c-def3252811dd/4540774745616.png/3000x3000bb.jpg">
 <div style="display:block">
 <h1 class="parrafo" style="font-size:17px;width:400px;margin-left:40px;">浅草Guilty Girlの歌 (lit. Asakusa Guilty Girl's Song) is Polka Takahashi's 1st solo single that was released on August 27, 2025.<br><br>1. <span style="color:#ffdd3c"><a style="color:#ffdd3c" href="#titulocancion">浅草Guilty Girlの歌</a></span> (lit. Asakusa Guilty Girl's Song)
 <br>2. <span style="color:#ffdd3c">オドルポルカ</span> (lit. Dancing Polka)
@@ -841,32 +849,43 @@ function editarTarjeta(card) {
   // Al salir de edición, guardar
 card.addEventListener("blur", (e) => {
 
-  // Si el elemento que recibe el foco ES el botón, no cerrar aún
+  // Si el foco va al botón eliminar, no cerrar
   if (e.relatedTarget && e.relatedTarget.classList.contains("btn-eliminar-tarjeta")) {
-    return; // ← IMPORTANTE
+    return;
   }
 
   // Quitar editabilidad
   card.contentEditable = false;
 
-  // Eliminar botón si existe
+  // Quitar botón
   const btn = card.querySelector(".btn-eliminar-tarjeta");
   if (btn) btn.remove();
 
-// --- NORMALIZAR TARJETA ANTES DE GUARDAR ---
+// ===== NORMALIZAR SIN TOCAR CONTENIDO =====
 const clon = card.cloneNode(true);
 
-// asegurar clases clave
-const spans = clon.querySelectorAll("span");
+// asegurar clases CLAVE (sin modificar texto)
+const asegurarClase = (selector, clase) => {
+  const el = clon.querySelector(selector);
+  if (el) el.classList.add(clase);
+};
 
-spans.forEach(span => {
-  if (span.textContent.trim() === "") return;
+// estas son las que usa la tabla
+asegurarClase(".character", "character");
+asegurarClase(".kunyomi", "kunyomi");
+asegurarClase(".onyomi", "onyomi");
+asegurarClase(".español", "español");
+asegurarClase(".cancion", "cancion");
 
-  if (span.closest(".español")) span.className = "español";
-  if (span.closest(".kunyomi")) span.className = "kunyomi";
-  if (span.closest(".onyomi")) span.className = "onyomi";
-  if (span.closest(".cancion")) span.className = "cancion";
+// limpiar contenteditable
+clon.querySelectorAll("[contenteditable]").forEach(el => {
+  el.removeAttribute("contenteditable");
 });
+
+tarjetas1[indice1] = clon.outerHTML;
+guardarTarjetas();
+reconstruirTablaKanji();
+
 
 // limpiar contenteditable
 clon.querySelectorAll("[contenteditable]").forEach(el => {
