@@ -795,6 +795,22 @@ function siguiente(carrusel) {
 
 mostrarTarjeta1();
 
+function rubyATextoPlano(element) {
+  element.querySelectorAll("ruby").forEach(ruby => {
+    const kanji = ruby.childNodes[0]?.textContent || "";
+    const rt = ruby.querySelector("rt")?.textContent || "";
+    const texto = document.createTextNode(`${kanji}(${rt})`);
+    ruby.replaceWith(texto);
+  });
+}
+
+function textoPlanoARuby(element) {
+  element.innerHTML = element.innerHTML.replace(
+    /([一-龯々〆ヵヶ]+)\(([ぁ-ゔァ-ヴー]+)\)/g,
+    '<ruby>$1<rt>$2</rt></ruby>'
+  );
+}
+
 
 // EDITAR TARJETAS ───────────────────────────────────────────────
 
@@ -804,6 +820,8 @@ function editarTarjeta(card) {
 
   // Hacer editable
   card.contentEditable = true;
+  // Al entrar en edición → ruby a texto plano
+rubyATextoPlano(card);
   card.focus();
 
   // Crear botón de eliminar
@@ -860,6 +878,10 @@ card.addEventListener("blur", (e) => {
   // Quitar botón
   const btn = card.querySelector(".btn-eliminar-tarjeta");
   if (btn) btn.remove();
+
+// Al salir de edición → texto plano a ruby
+textoPlanoARuby(card);
+
 
 // ===== NORMALIZAR SIN TOCAR CONTENIDO =====
 const clon = card.cloneNode(true);
@@ -1027,3 +1049,4 @@ overlay.addEventListener("click", () => {
 
 </body>
 </html>
+
