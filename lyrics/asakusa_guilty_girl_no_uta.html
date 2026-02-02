@@ -391,9 +391,10 @@ transition: background-color 0.4s, color 0.4s; /* transición suave */
   transform-origin: top left;
   position: relative;
   left: 50%;
-  width: 100% !important; /* Asegura que no sea más ancho que la pantalla */
-  margin-bottom: 0 !important; /* Cambiamos esto */
+  overflow: hidden;          /* ← CLAVE */
+  padding-bottom: 0 !important;
 }
+
 
 /* En lugar de margen negativo en el contenedor, 
    ajustamos el espacio del siguiente elemento */
@@ -1071,6 +1072,7 @@ overlay.addEventListener("click", () => {
 
 </body>
 </html>
+
 
 
 
