@@ -185,10 +185,18 @@ transition: background-color 0.4s, color 0.4s; /* transición suave */
   align-items: center;
   box-sizing: border-box;
 }
-	.linea h1,
-.traduccion h1 {
-  line-height: 1.6;
+.traduccion {
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
+
+.traduccion h1 {
+  text-align: center;
+  line-height: 1.5;
+  display: block;
+}
+
 .linea h1 {
   margin: 0;
   font-size: 18px;          /* MISMO tamaño que el texto original */
@@ -196,6 +204,13 @@ transition: background-color 0.4s, color 0.4s; /* transición suave */
   color: black;             /* Igual que la línea original */
   cursor: pointer;
   word-break: break-word;
+}
+.linea h1 {
+  font-size: clamp(14px, 4.5vw, 18px);
+}
+
+.traduccion h1 {
+  font-size: clamp(12px, 4vw, 15px);
 }
 
 /* Traducción — ahora visualmente igual, solo color diferente */
@@ -206,8 +221,12 @@ transition: background-color 0.4s, color 0.4s; /* transición suave */
   text-align: left;       /* centradas */
 }
 .bloque {
-  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;   /* centra TODO el bloque */
+  width: 100%;
 }
+
 
 .traduccion {
   display: block;
@@ -225,6 +244,7 @@ transition: background-color 0.4s, color 0.4s; /* transición suave */
   display: block;
   text-align: left;
 }
+	
   .content {
     display: flex;
     gap: 20px;
@@ -287,10 +307,18 @@ transition: background-color 0.4s, color 0.4s; /* transición suave */
     width: 100% !important;
     margin: 20px auto !important;
   }
-.linea h1 {
-  text-align: center !important;
-  line-height: 1.7 !important;
+.linea {
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
+
+.linea h1 {
+  text-align: center;
+  line-height: 1.6;
+  white-space: normal;
+}
+
 
 .traduccion h1 {
   text-align: center !important;
@@ -1271,6 +1299,7 @@ overlay.addEventListener("click", () => {
 </body></html>
 </body>
 </html>
+
 
 
 
