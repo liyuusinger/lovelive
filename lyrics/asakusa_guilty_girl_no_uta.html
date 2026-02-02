@@ -1020,27 +1020,53 @@ function subirBackup(event) {
 
 function descargarHTML() {
   try {
-    const dt = document.doctype;
-    const doctypeString = dt ? new XMLSerializer().serializeToString(dt) : '<!DOCTYPE html>';
-    const html = document.documentElement.outerHTML;
+    // 1. Clonar el documento
+    const clone = document.documentElement.cloneNode(true);
 
-    const contenido = doctypeString + '\n' + html;
-    const blob = new Blob([contenido], { type: 'text/html' });
+    // 2. Buscar el script principal
+    const scripts = clone.querySelectorAll("script");
+    let scriptPrincipal = null;
+
+    scripts.forEach(s => {
+      if (s.textContent.includes("let datos") && s.textContent.includes("let tarjetas1")) {
+        scriptPrincipal = s;
+      }
+    });
+
+    if (!scriptPrincipal) {
+      alert("No se encontró el script principal");
+      return;
+    }
+
+    // 3. Reemplazar datos dinámicos por datos reales
+    scriptPrincipal.textContent = scriptPrincipal.textContent
+      .replace(
+        /let datos = [\s\S]*?;\n/,
+        `let datos = ${JSON.stringify(datos, null, 2)};\n`
+      )
+      .replace(
+        /let tarjetas1 = [\s\S]*?;\n/,
+        `let tarjetas1 = ${JSON.stringify(tarjetas1, null, 2)};\n`
+      );
+
+    // 4. Generar HTML final
+    const doctype = "<!DOCTYPE html>\n";
+    const htmlFinal = doctype + clone.outerHTML;
+
+    const blob = new Blob([htmlFinal], { type: "text/html" });
     const url = URL.createObjectURL(blob);
 
-    const a = document.createElement('a');
+    const a = document.createElement("a");
     a.href = url;
-    a.download = 'guiltygirl_modificada.html';
-    document.body.appendChild(a);
+    a.download = "guiltygirl_completo.html";
     a.click();
-    a.remove();
 
-    setTimeout(() => URL.revokeObjectURL(url), 1000);
-  } catch (err) {
-    alert('Error al generar el archivo HTML: ' + err.message);
+    URL.revokeObjectURL(url);
+
+  } catch (e) {
+    alert("Error al generar el HTML: " + e.message);
   }
 }
-
 
 // POPUP ───────────────────────────────────────────────
 
@@ -1072,6 +1098,7 @@ overlay.addEventListener("click", () => {
 
 </body>
 </html>
+
 
 
 
