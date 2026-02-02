@@ -391,7 +391,8 @@ transition: background-color 0.4s, color 0.4s; /* transición suave */
   transform-origin: top left;
   position: relative;
   left: 50%;
-  margin-bottom: -320px;
+  overflow: hidden; 
+  padding-bottom: 0 !important;
 }
 
 #contenedor + .botoneslinea {
@@ -1066,6 +1067,7 @@ overlay.addEventListener("click", () => {
 
 </body>
 </html>
+
 
 
 
