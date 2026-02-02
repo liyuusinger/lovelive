@@ -386,6 +386,11 @@ transition: background-color 0.4s, color 0.4s; /* transición suave */
   #botonkanji {
       margin-top: 40px !important;
   }
+	#contenedor {
+  transform: scale(0.88);
+  transform-origin: top center;
+  margin-bottom: -40px;
+}
   .back {
     float: left !important;
     
@@ -393,31 +398,17 @@ transition: background-color 0.4s, color 0.4s; /* transición suave */
   #titulocancion {
       margin-top: 50px !important;
   }
-	.linea h1 {
-  font-size: 15px !important;   /* antes 18px */
-  line-height: 1.4;
-}
-
-/* ESCALADO DE LA TRADUCCIÓN (MISMA PROPORCIÓN) */
-.traduccion h1 {
-  font-size: 13px !important;   /* antes 15px */
-  line-height: 1.35;
-}
-
-/* FURIGANA MÁS CHICA PARA QUE NO EMPUJE */
-ruby rt {
-  font-size: 0.6em;
-}
-
-/* REDUCIR ESPACIO ENTRE LÍNEA Y TRADUCCIÓN */
-.bloque {
-  margin-bottom: 10px !important; /* antes 15px */
-}
 .estrella {
   filter: drop-shadow(0 0 0 white) 
           drop-shadow(0 0 5px #ffdd3c);
 }
 }
+	@media (max-width: 380px) {
+  #contenedor {
+    transform: scale(0.82);
+  }
+}
+
 </style>
 </head>
 <body>
