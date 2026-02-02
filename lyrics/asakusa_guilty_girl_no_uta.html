@@ -386,12 +386,13 @@ transition: background-color 0.4s, color 0.4s; /* transición suave */
   #botonkanji {
       margin-top: 40px !important;
   }
-	#contenedor {
-  transform: scale(0.88);
-  transform-origin: top center;
-  margin-left: 0;
-  margin-right: auto;
+#contenedor {
+  transform: translateX(-50%) scale(0.88);
+  transform-origin: top left;
+  position: relative;
+  left: 50%;
 }
+
   .back {
     float: left !important;
     
@@ -1061,4 +1062,5 @@ overlay.addEventListener("click", () => {
 
 </body>
 </html>
+
 
