@@ -192,6 +192,9 @@ transition: background-color 0.4s, color 0.4s; /* transición suave */
   text-align: center;
   color: black;             /* Igual que la línea original */
   cursor: pointer;
+	  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
   word-break: break-word;
 }
 
@@ -204,11 +207,17 @@ transition: background-color 0.4s, color 0.4s; /* transición suave */
 }
 .bloque {
   margin-bottom: 15px;
+	width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .traduccion {
   display: block;
   width: 100%;
+  max-width: 420px;
+  margin: 0 auto;
   text-align: left;
   box-sizing: border-box;
 }
@@ -284,7 +293,19 @@ transition: background-color 0.4s, color 0.4s; /* transición suave */
     width: 100% !important;
     margin: 20px auto !important;
   }
+#lineas,
+#contenedor {
+  width: 100% !important;
+  padding: 0 10px !important;
+}
 
+.linea h1 {
+  font-size: 16px;
+}
+
+.traduccion h1 {
+  font-size: 14px;
+}
   .caja1 {
     display: block !important;
     text-align: center !important;
@@ -355,10 +376,14 @@ transition: background-color 0.4s, color 0.4s; /* transición suave */
   .pie2 {
       padding-left: 10px !important;
   }
-  #contenedor {
-      
-      width: 400px !important;
-  }
+#contenedor {
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto;
+  padding: 0 12px;
+  box-sizing: border-box;
+}
+
   .botoneslinea {
       
       width: 80px !important;
@@ -439,7 +464,8 @@ transition: background-color 0.4s, color 0.4s; /* transición suave */
   
   <h1 id="titulocancion" style="color:#ffdd3c;text-align:center"><ruby>浅草<rt>あさくさ</rt>Guilty Girlの<ruby>歌<rt>うた</rt></ruby></h1>
   
-<div id="contenedor" style="width:400px; margin: 0 auto; text-align: center;"></div>
+<div id="contenedor">
+</div>
 
 
   <div class="botoneslinea" style="display:flex; justify-content:center; margin-top:10px;">
@@ -1049,3 +1075,4 @@ overlay.addEventListener("click", () => {
 
 </body>
 </html>
+
