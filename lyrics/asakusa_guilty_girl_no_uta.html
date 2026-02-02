@@ -391,12 +391,16 @@ transition: background-color 0.4s, color 0.4s; /* transición suave */
   transform-origin: top left;
   position: relative;
   left: 50%;
-  overflow: hidden; 
-  padding-bottom: 0 !important;
+  width: 100% !important; /* Asegura que no sea más ancho que la pantalla */
+  margin-bottom: 0 !important; /* Cambiamos esto */
 }
 
+/* En lugar de margen negativo en el contenedor, 
+   ajustamos el espacio del siguiente elemento */
 #contenedor + .botoneslinea {
-  margin-top: -140px;
+  margin-top: -50px; /* Ajusta este valor según necesites subir los botones */
+  position: relative;
+  z-index: 10;
 }
   .back {
     float: left !important;
@@ -1067,6 +1071,7 @@ overlay.addEventListener("click", () => {
 
 </body>
 </html>
+
 
 
 
