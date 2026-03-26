@@ -1128,45 +1128,62 @@ card.addEventListener("blur", (e) => {
   textoPlanoARuby(card);
 
   // ===== GUARDAR =====
-  // Extraer valores del DOM vivo ANTES de clonar,
-  // porque el browser puede fragmentar los spans al editar
+  // Capturar valores del DOM vivo ANTES de clonar.
+  // El browser puede fragmentar spans al editar con contentEditable,
+  // así que extraemos texto/HTML directamente del nodo vivo.
   const liveCharacter = card.querySelector('.character');
   const liveKunyomi   = card.querySelector('.kunyomi');
   const liveOnyomi    = card.querySelector('.onyomi');
   const liveEspanol   = card.querySelector('.español');
   const liveCancion   = card.querySelector('.cancion');
 
+  // Guardar innerHTML de cancion ANTES de clonar (puede tener <ruby>)
+  const cancionHTML = liveCancion ? liveCancion.innerHTML.trim() : null;
+
   const clon = card.cloneNode(true);
 
-  // limpiar contenteditable
+  // Limpiar contenteditable
   clon.querySelectorAll("[contenteditable]").forEach(el => {
     el.removeAttribute("contenteditable");
   });
 
-  // Si alguna clase clave se perdió en el clon, restaurarla buscando
-  // el span equivalente por posición en el DOM vivo
-  const restaurarClase = (clonRoot, liveEl, clase) => {
+  // Restaurar clase si el browser la rompió (para campos de texto plano)
+  const restaurarClaseTexto = (clonRoot, liveEl, clase) => {
     if (!liveEl) return;
-    const enClon = clonRoot.querySelector('.' + clase);
-    if (!enClon) {
-      // Buscar todos los spans del clon y marcar el que corresponde
-      // por su texto (estrategia de fallback segura)
-      const texto = liveEl.textContent.trim();
-      const spans = clonRoot.querySelectorAll('span');
-      for (const s of spans) {
-        if (s.textContent.trim() === texto && !s.className) {
-          s.classList.add(clase);
-          break;
-        }
+    if (clonRoot.querySelector('.' + clase)) return; // ya existe, ok
+    const texto = liveEl.textContent.trim();
+    const spans = clonRoot.querySelectorAll('span');
+    for (const s of spans) {
+      if (s.textContent.trim() === texto && !s.className) {
+        s.classList.add(clase);
+        break;
       }
     }
   };
 
-  restaurarClase(clon, liveCharacter, 'character');
-  restaurarClase(clon, liveKunyomi,   'kunyomi');
-  restaurarClase(clon, liveOnyomi,    'onyomi');
-  restaurarClase(clon, liveEspanol,   'español');
-  restaurarClase(clon, liveCancion,   'cancion');
+  restaurarClaseTexto(clon, liveCharacter, 'character');
+  restaurarClaseTexto(clon, liveKunyomi,   'kunyomi');
+  restaurarClaseTexto(clon, liveOnyomi,    'onyomi');
+  restaurarClaseTexto(clon, liveEspanol,   'español');
+
+  // Para cancion: inyectar directamente el innerHTML que capturamos del DOM vivo
+  if (cancionHTML !== null) {
+    let cancionEnClon = clon.querySelector('.cancion');
+    if (!cancionEnClon) {
+      // El span perdió la clase — buscarlo por contenido similar y reasignar
+      const spans = clon.querySelectorAll('span');
+      for (const s of spans) {
+        if (!s.className) {
+          s.classList.add('cancion');
+          cancionEnClon = s;
+          break;
+        }
+      }
+    }
+    if (cancionEnClon) {
+      cancionEnClon.innerHTML = cancionHTML;
+    }
+  }
 
   tarjetas1[indice1] = clon.outerHTML;
   guardarTarjetas();
