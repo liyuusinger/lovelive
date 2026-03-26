@@ -1302,7 +1302,38 @@ overlay.addEventListener("click", () => {
   popup.style.display = "none";
   overlay.style.display = "none";
 });
+// 1. Al cargar la página, verificamos si hay datos guardados
+document.addEventListener("DOMContentLoaded", () => {
+    const savedContent = localStorage.getItem("letras_guardadas");
+    if (savedContent) {
+        document.getElementById("contenedor").innerHTML = savedContent;
+    }
+    
+    // Habilitar la edición en los elementos de texto
+    hacerEditables();
+});
 
+// 2. Función para permitir que el usuario haga clic y escriba
+function hacerEditables() {
+    const contenedor = document.getElementById("contenedor");
+    // Buscamos todos los span y h1 dentro del contenedor
+    const editables = contenedor.querySelectorAll("span, .trad-texto");
+    
+    editables.forEach(el => {
+        el.setAttribute("contenteditable", "true");
+        
+        // Cada vez que se pierde el foco (blur) o se escribe (input), guardamos
+        el.addEventListener("input", () => {
+            guardarCambios();
+        });
+    });
+}
+
+// 3. Función que guarda todo el HTML interno del contenedor
+function guardarCambios() {
+    const contenido = document.getElementById("contenedor").innerHTML;
+    localStorage.setItem("letras_guardadas", contenido);
+}
 </script>
 
   
