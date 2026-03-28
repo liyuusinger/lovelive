@@ -844,39 +844,7 @@ function convertirATextoHTML(texto){
 
   return `<h1>${resultado.trim()}</h1>`;
 }
-function descargarTarjetaActual() {
-  const tarjeta = tarjetas1[indice1];
-  const blob = new Blob([JSON.stringify({ tarjeta })], { type: "application/json" });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = `kanji_tarjeta_${indice1 + 1}.json`;
-  a.click();
-  URL.revokeObjectURL(url);
-}
 
-function cargarTarjetaIndividual(event) {
-  const file = event.target.files[0];
-  if (!file) return;
-  const reader = new FileReader();
-  reader.onload = function(e) {
-    try {
-      const data = JSON.parse(e.target.result);
-      if (data.tarjeta) {
-        tarjetas1[indice1] = data.tarjeta;
-        guardarTarjetas();
-        mostrarTarjeta1();
-        alert("Tarjeta cargada ✨");
-      } else {
-        alert("Archivo inválido.");
-      }
-    } catch {
-      alert("El archivo no es válido.");
-    }
-  };
-  reader.readAsText(file);
-  event.target.value = "";
-}
 // --- Crea cada bloque de línea + traducción ---
 function crearBloque(textoLinea,textoTrad,index){
   const contenedor = document.getElementById("contenedor");
@@ -1052,41 +1020,8 @@ function reconstruirTablaKanji() {
 // CARRUSEL ───────────────────────────────────────────────
 
 function mostrarTarjeta1() {
-  const contenedor = document.getElementById("kanji1");
-  contenedor.innerHTML = tarjetas1[indice1];
-
-  // Botones individuales de tarjeta
-  const btnDiv = document.createElement("div");
-  btnDiv.style.cssText = "display:flex; gap:6px; margin-top:8px; padding: 0 20px 10px;";
-
-  const btnDescargar = document.createElement("button");
-  btnDescargar.textContent = "↓";
-  btnDescargar.title = "Descargar esta tarjeta";
-  btnDescargar.className = "btnlinea";
-  btnDescargar.style.cssText = "font-size:16px; width:28px; height:28px;";
-  btnDescargar.onclick = descargarTarjetaActual;
-
-  const inputCarga = document.createElement("input");
-  inputCarga.type = "file";
-  inputCarga.accept = ".json";
-  inputCarga.style.display = "none";
-  inputCarga.onchange = cargarTarjetaIndividual;
-
-  const btnCargar = document.createElement("button");
-  btnCargar.textContent = "↑";
-  btnCargar.title = "Cargar tarjeta desde archivo";
-  btnCargar.className = "btnlinea";
-  btnCargar.style.cssText = "font-size:16px; width:28px; height:28px;";
-  btnCargar.onclick = () => inputCarga.click();
-
-  btnDiv.appendChild(btnDescargar);
-  btnDiv.appendChild(btnCargar);
-  btnDiv.appendChild(inputCarga);
-
-  const card = contenedor.querySelector(".kanji-card");
-  if (card) card.appendChild(btnDiv);
-
-  reconstruirTablaKanji();
+  document.getElementById("kanji1").innerHTML = tarjetas1[indice1];
+  reconstruirTablaKanji();   // ← IMPORTANTÍSIMO
 }
 
 function anterior(carrusel) {
