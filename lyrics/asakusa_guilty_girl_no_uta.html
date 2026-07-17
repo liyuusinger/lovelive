@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="es" data-cursorstyle="true" speedupyoutubeads="false" resize="225,400"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kurenaido&amp;display=swap" rel="stylesheet">
+<title>浅草Guilty Girlの歌</title>
+<style>
+html {
+  scroll-behavior: smooth;
+}
+body {
+  background-color: #feee8c;
+  font-family: "Zen Kurenaido", sans-serif;
+}
+h1 {
+ font-family: "Zen Kurenaido", sans-serif;
+}
+ruby {
+  ruby-align: center; /* comportamiento normal */
+}
+
+/* SOLO cuando el ruby tiene texto inmediatamente después */
+ruby:has(+ :not(rt)):has(+ :not(ruby)) {
+  ruby-align: start;
+}
+a {
+text-decoration: none;
+color: inherit;
+}
+
+.boton {
+  background-color: white;     /* fondo blanco */
+  color: black;                /* texto negro (podés cambiarlo) */
+  border: 1px solid #ffdd3c;    /* borde amarillo */
+  padding: 0px 20px;          /* tamaño del botón */
+  cursor: pointer;             /* cursor tipo mano */
+  transition: background-color 0.3s, color 0.3s; /* transición suave */
+}
+
+.boton:hover {
+  background-color: #ffdd3c;    /* fondo amarillo al pasar el mouse */
+  color: white;                /* texto blanco al pasar el mouse */
+}
+  .btnlinea {
+      background-color: white;
+      color:#ffdd3c;
+      font-size:15px;
+      border: solid 1px #ffdd3c;
+      width:30px;
+      height:30px;
+      border-radius: 20%;
+      margin: 2px;
+  }
+  
+  .btnlinea:hover {
+      background: #ffdd3c;
+      color: white;
+	cursor:pointer;
+  }
+
+.carousel-container { 
+      width: 450px; 
+      margin: 40px auto;
+      padding: 20px;
+      
+    }
+
+    .carousel {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .flecha {
+      background-color:white;
+color:#ffdd3c;
+width:45px;
+height:45px;
+border: 1px solid #ffdd3c;
+border-radius:50%;
+font-size:28px;
+cursor:pointer;
+padding-bottom:5px;
+transition: background-color 0.4s, color 0.4s; /* transición suave */
+    }
+.flecha:hover {
+	color: white;
+	background-color:#ffdd3c
+}
+    .tarjeta {
+      border: solid 1px black;
+      width: 300px;
+      padding: 20px;
+      border-radius: 10px;
+      margin: 0 auto;
+    }
+
+    .tarjeta h1 {
+      margin: 0;
+    }
+
+    .contenedor-tarjeta {
+      display: flex;
+      align-items: center;
+    }
+  .circulo {
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  line-height: 25px;
+  text-align: center;
+  border: 1px solid #ffdd3c;
+  border-radius: 50%;
+  }
+  html, body {
+  overflow-x: hidden;
+}
+  table {
+    margin-left:30px;
+    border-collapse: collapse;
+    margin-top: 20px;
+    width: 800px;
+    border-radius:100px;
+  }
+  th, td {
+    border: 1px solid #ffdd3c;
+    padding: 8px;
+    text-align: center;
+    vertical-align: middle;
+  }
+  th {
+    background-color: #ffdd3c;
+    color: white;
+    
+  }
+
+    #popup1 {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.5);
+    z-index: 1000;
+    width: 800px;
+    max-height: 80vh; /* No más alto que el 80% de la pantalla */
+    overflow: hidden; /* Evita que crezca */
+  }
+
+  /* Fondo oscuro detrás del popup */
+  #overlay {
+    display: none; /* Oculto al inicio */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 900;
+  }
+  #table-container {
+    max-height: 60vh; /* Altura máxima del área de la tabla */
+    overflow-y: auto; /* Scroll vertical */
+  }
+  #kanji-table th:last-child {
+    cursor: pointer;
+}
+  span {
+    color: black;
+    box-shadow: inset 0 -0.1em 0 #ffdd3c;
+    margin-bottom:0;
+  }
+
+  .container {
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  width: 90%;
+  margin: 2vh auto 0;  /* centrado horizontal */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+}
+.linea h1 {
+  margin: 0;
+  font-size: 18px;          /* MISMO tamaño que el texto original */
+  text-align: center;
+  color: black;             /* Igual que la línea original */
+  cursor: pointer;
+  word-break: break-word;
+}
+
+/* Traducción — ahora visualmente igual, solo color diferente */
+.traduccion h1 {
+  margin: 0;
+  font-size: 15px;          /* MISMO tamaño para que coincidan */
+  color: #ffdd3c;           /* amarillo */
+  text-align: left;       /* centradas */
+}
+.bloque {
+  margin-bottom: 15px;
+}
+
+.traduccion {
+  display: block;
+  width: 100%;
+  text-align: left;
+  box-sizing: border-box;
+}
+
+
+.traduccion h1 {
+  margin: 0;
+  font-size: 15px;
+  color: #ffdd3c;
+  width: 100%;
+  display: inline-block;
+  text-align: left;
+}
+  .content {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    border-radius: 12px;
+    border: 1px solid #feee8c;
+    padding: 20px;
+  }
+  .back {
+      height:20px;
+      margin-left:30px;
+      margin-top:10px;
+  }
+  .caja {
+      border-radius:20px;
+      border:solid 2px #feee8c;
+      width:870px;
+      display: block;
+      margin-top:50px;
+      margin-left:60px;
+      padding-top:30px;
+      padding-bottom:30px;
+  }
+  .caja1 {
+      display:flex;
+  }
+  .divisor {
+      width:350px;
+      margin-left:320px;
+      filter: hue-rotate(-10deg);
+  }
+.btn-eliminar-tarjeta:hover {
+  background:#ff2222 !important;
+}
+[contenteditable="true"] {
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Por defecto en desktop: mostrar desktop, ocultar mobile */
+.trad-mobile { display: none; }
+.trad-desktop { display: block; }
+
+/* En mobile real: mostrar mobile, ocultar desktop */
+@media (max-width: 700px) {
+  .trad-mobile { display: block; }
+  .trad-desktop { display: none; }
+}
+
+/* Cuando el toggle activa vista mobile en desktop */
+body.vista-mobile .trad-mobile { display: block; }
+body.vista-mobile .trad-desktop { display: none; }
+@media (max-width: 700px) {
+
+  /* ── WRAPPER PRINCIPAL ── */
+  #inicio {
+    width: 95% !important;
+    margin: 20px auto 0 !important;
+    padding: 15px !important;
+    box-sizing: border-box !important;
+  }
+
+  body {
+    overflow-x: hidden !important;
+  }
+
+  #secciones-wrapper {
+    width: 100% !important;
+    overflow-x: hidden !important;
+  }
+
+  /* ── CAJA PORTADA (imagen + texto) ── */
+  .caja {
+    width: 100% !important;
+    margin: 16px 0 !important;
+    padding: 16px !important;
+    box-sizing: border-box !important;
+  }
+
+  .caja1 {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+
+  .imagen {
+    width: 85% !important;
+    max-width: 300px !important;
+    height: auto !important;
+    margin: 0 auto 16px !important;
+  }
+
+  .parrafo {
+    width: 100% !important;
+    margin: 0 auto !important;
+    font-size: 15px !important;
+    text-align: left !important;
+  }
+
+  .caja2 {
+    display: flex !important;
+    justify-content: center !important;
+    margin: 16px auto 0 !important;
+  }
+
+  .caja2 iframe {
+    width: 100% !important;
+    max-width: 280px !important;
+  }
+
+  /* ── FLECHA BACK (arriba izquierda) ── */
+  .back {
+    height: 13px !important;
+    margin-left: 8px !important;
+  }
+
+  /* ── TÍTULOS ── */
+  h1 {
+    text-align: center !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    font-size: 15px !important;
+  }
+
+  /* título principal de la canción */
+  #inicio > h1 {
+    font-size: 18px !important;
+  }
+
+  /* títulos de sección (nombre de la canción en amarillo) */
+  [id^="titulo-"] {
+    font-size: 19px !important;
+    margin: 8px 0 !important;
+  }
+
+  /* ── LÍNEAS DE LETRA ── */
+  .linea h1 {
+    font-size: 14px !important;
+  }
+
+  .traduccion h1 {
+    font-size: 12px !important;
+  }
+
+  .bloque {
+    margin-bottom: 8px !important;
+  }
+
+  /* ── SEPARADOR GIF ── */
+  .divisor {
+    width: 75% !important;
+    max-width: 270px !important;
+    margin: 6px auto !important;
+    display: block !important;
+  }
+
+  /* ── SECCIÓN DE LETRA (contenedor de líneas) ── */
+  [id^="contenedor-"] {
+    width: 95% !important;
+    margin: 0 auto !important;
+  }
+
+  /* ── SECCIÓN KANJI ── */
+  [id^="kanji-"] {
+    width: 100% !important;
+    margin-left: 0 !important;
+    padding: 10px 0 6px !important;
+    box-sizing: border-box !important;
+  }
+
+  /* título 新しい漢字 */
+  [id^="kanji-"] > h1 {
+    font-size: 18px !important;
+    margin: 6px 0 !important;
+  }
+
+  /* ── CARRUSEL ── */
+  .carousel-container {
+    width: 100% !important;
+    max-width: 300px !important;
+    margin: 6px auto !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  .carousel {
+    justify-content: center !important;
+    gap: 6px !important;
+  }
+
+  .flecha {
+    width: 32px !important;
+    height: 32px !important;
+    font-size: 18px !important;
+    flex-shrink: 0 !important;
+  }
+
+  /* ── TARJETA KANJI ── */
+  .tarjeta, .kanji-card {
+    width: auto !important;
+    max-width: 200px !important;
+    padding: 8px 10px !important;
+    box-sizing: border-box !important;
+    margin: 0 auto !important;
+  }
+
+  .contenedor-tarjeta {
+    flex: 1 !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    min-width: 0 !important;
+  }
+
+  .kanji-card h1 {
+    font-size: 13px !important;
+    line-height: 1.4 !important;
+  }
+
+  .kanji-card h1.character {
+  font-size: 60px !important;
+  margin: 0 !important;
+}
+
+  /* ── BOTONES ボード y ＋ ── */
+  .carousel-container > div:last-child {
+    gap: 8px !important;
+    margin-top: 8px !important;
+  }
+
+  .carousel-container .boton {
+    height: 55px !important;
+    width: 80px !important;
+  }
+
+  .carousel-container .boton h1 {
+    font-size: 12px !important;
+  }
+
+  /* ── SPOTIFY IFRAME ── */
+  /* ── SPOTIFY IFRAME ── */
+  .spotify-iframe {
+    width: 220px !important;
+    height: 80px !important;
+    min-width: 0 !important;
+    display: block !important;
+    margin-bottom: 10px;
+  }
+
+  .caja2 {
+    display: flex !important;
+    justify-content: center !important;
+    margin: 16px auto 0 !important;
+    overflow: hidden !important;
+  }
+
+  /* ── POPUP TABLA ── */
+  .tabla-div {
+    width: 92vw !important;
+    max-width: 370px !important;
+    padding: 14px !important;
+    box-sizing: border-box !important;
+  }
+
+  .tabla-div-2 {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    position: relative !important;
+  }
+
+  .tabla-div-2 h1 {
+    margin: 0 auto !important;
+    font-size: 16px !important;
+    text-align: center !important;
+  }
+
+  .cruz {
+    display: block !important;
+    position: absolute !important;
+    right: 0 !important;
+    top: 0 !important;
+  }
+
+  [id^="table-container-"] {
+    width: 100% !important;
+    overflow-x: auto !important;
+  }
+
+  [id^="kanji-table-"] {
+    width: 100% !important;
+    min-width: 280px !important;
+    margin-left: 0 !important;
+    font-size: 13px !important;
+  }
+
+  [id^="kanji-table-"] td:first-child {
+    font-size: 32px !important;
+  }
+
+  /* ── BOTONES GLOBALES ── */
+  #inicio > div[style*="text-align:center"] {
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+  }
+
+  .boton {
+    font-size: 13px !important;
+  }
+
+  /* ── BOTÓN BACK Y ESTRELLA ── */
+  .back {
+    float: left !important;
+    margin-left: 10px !important;
+  }
+
+  .estrella {
+    filter: drop-shadow(0 0 5px #ffdd3c) !important;
+  }
+
+  /* ── TRADUCCIÓN ── */
+  .traduccion h1 {
+    text-align: left !important;
+  }
+
+  /* ── BOTONES DUPLICAR/BORRAR SECCIÓN ── */
+  #inicio > div > button.boton {
+    width: 160px !important;
+    font-size: 13px !important;
+  }
+
+  /* ── LINKS DESCARGAR/SUBIR ── */
+  .pie, .pie2 {
+    padding: 0 8px !important;
+  }
+
+  table {
+    margin-left: 0 !important;
+    width: 100% !important;
+  }
+}
+
+</style>
+<style type="text/css">#jpdictionary * :not(svg,path){all:revert}#jpdictionary svg{width:auto!important}#jpdictionary{font-size:18px!important;font-family:Arial,ヒラギノ角ゴ Pro W3,Hiragino Kaku Gothic Pro,Osaka,メイリオ,Meiryo,ＭＳ Ｐゴシック,MS PGothic,sans-serif!important;color:#000!important;line-height:1.5!important;text-align:left!important}#jpdictionary .o-cpt{cursor:pointer}#jpdictionary .o-result-item{line-height:1.5;display:block;margin-right:0;cursor:pointer}#jpdictionary .o-result-item:hover{border-color:#c6d6ef!important}#jpdictionary .o-selected-result{max-height:300px;overflow-y:scroll}#jpdictionary .o-selected-result::-webkit-scrollbar{width:13px}#jpdictionary .o-selected-result::-webkit-scrollbar-thumb{border-radius:10px;-webkit-box-shadow:inset 3px 0 0 3px #fff;background:rgba(0,0,0,.2)}#jpdictionary .o-pop-nav div{font-size:14px;padding:3.2px 8px}#jpdictionary .o-pop-speak{margin-top:5px;margin-right:8px;font-size:16px;cursor:pointer}#jpdictionary .o-search-mobile{z-index:2147483647;position:absolute;cursor:pointer;display:none}#jpdictionary .o-popup-tag{z-index:99999;position:absolute;display:none;padding:10px 5px 10px 10px}#jpdictionary .o-bg-white{background-color:#fff!important}#jpdictionary .o-border{border:1px solid #dee2e6!important}#jpdictionary .o-rounded{border-radius:4px!important}#jpdictionary .o-shadow{box-shadow:0 8px 16px rgba(0,0,0,.15)!important}#jpdictionary .o-btn-close{box-sizing:content-box;width:16px;height:16px;padding:4px 4px;color:#000;background:transparent url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M.293.293a1 1 0 011.414 0L8 6.586 14.293.293a1 1 0 111.414 1.414L9.414 8l6.293 6.293a1 1 0 01-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 01-1.414-1.414L6.586 8 .293 1.707a1 1 0 010-1.414z'/%3E%3C/svg%3E") 50%/16px auto no-repeat;border:0;border-radius:4px;opacity:.5;cursor:pointer}#jpdictionary .o-btn-close:hover{opacity:.75}#jpdictionary .o-me-1{margin-right:4px!important}#jpdictionary .o-end-0{right:0!important}#jpdictionary .o-top-0{top:0!important}#jpdictionary .o-position-absolute{position:absolute!important}#jpdictionary ul{padding-left:32px;display:block;list-style-type:disc;-webkit-margin-before:16px;margin-block-start:16px;-webkit-margin-after:16px;margin-block-end:16px;-webkit-margin-start:0;margin-inline-start:0;-webkit-margin-end:0;margin-inline-end:0;-webkit-padding-start:40px;padding-inline-start:40px}#jpdictionary .o-pt-1{padding-top:4px!important}#jpdictionary .mark,#jpdictionary mark{padding:0!important;background:linear-gradient(transparent 60%,#ff6 0)!important}#jpdictionary .o-mt-1{margin-top:4px!important}#jpdictionary .o-p-2{padding:8px!important}#jpdictionary .o-mb-1{margin-bottom:4px!important}#jpdictionary .o-border-3{border-width:3px!important}#jpdictionary .o-text-secondary{color:#6c757d!important}#jpdictionary .o-text-primary{cursor:pointer;color:#0d6efd}#jpdictionary .o-text-primary:hover{text-decoration:underline}#jpdictionary .o-text-black-50{color:rgba(0,0,0,.5)!important}#jpdictionary .o-w-100{width:100%!important}#jpdictionary .o-link-danger{color:#dc3545}#jpdictionary .o-link-danger:hover{color:#0d6efd}#jpdictionary .o-text-decoration-none{text-decoration:none!important}#jpdictionary .o-fs-6{font-size:16px!important}#jpdictionary .o-ms-1{margin-left:4px!important}#jpdictionary .o-mt-2{margin-top:8px!important}#jpdictionary .o-float-start{float:left!important}#jpdictionary label{display:inline-block}#jpdictionary .o-float-end{float:right!important}#jpdictionary .o-link-secondary{color:#6c757d!important}#jpdictionary .o-result-item .o-inflect{font-size:14px;color:#666;overflow:hidden;text-overflow:ellipsis}#jpdictionary .o-nav-tabs{border-bottom:1px solid #dee2e6}#jpdictionary .o-nav{display:flex;flex-wrap:wrap;padding-left:0;margin-bottom:0;list-style:none}#jpdictionary ul{margin-top:0;margin-bottom:16px}#jpdictionary li{display:list-item;text-align:-webkit-match-parent}#jpdictionary .o-nav-tabs .o-nav-item.show .o-nav-link,#jpdictionary .o-nav-tabs .o-nav-link.o-active{color:#495057;background-color:#fff;border-color:#dee2e6 #dee2e6 #fff}#jpdictionary .o-nav-link{display:block;padding:8px 16px;color:#0d6efd;text-decoration:none;transition:color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out;cursor:pointer}#jpdictionary .o-nav-tabs .o-nav-link{margin-bottom:-1px;background:0 0;border:1px solid transparent;border-top-left-radius:4px;border-top-right-radius:4px;line-height:1.5}#jpdictionary svg:not(:host).o-svg-inline--fa,#jpdictionary svg:not(:root).o-svg-inline--fa{overflow:visible;box-sizing:content-box}#jpdictionary .o-svg-inline--fa{display:inline-block;height:16px;overflow:visible;vertical-align:-2px}#jpdictionary .o-form-check{font-size:16px;font-weight:400;line-height:1.5;color:#212529;-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent;box-sizing:border-box;display:block;min-height:1.5rem;padding-left:1.5em;margin-bottom:0}#jpdictionary .o-form-check-input{box-sizing:border-box;margin:0;font-family:inherit;font-size:inherit;line-height:inherit;width:1em;height:1em;margin-top:.25em;vertical-align:top;background-color:#fff;background-repeat:no-repeat;background-position:50%;background-size:contain;border:1px solid rgba(0,0,0,.25);-webkit-appearance:none;-moz-appearance:none;appearance:none;-webkit-print-color-adjust:exact;float:left;margin-left:-1.5em;border-radius:.25em}#jpdictionary .o-form-check-input:before{content:""}#jpdictionary .o-form-check-input:checked[type=checkbox]{background-color:#0d6efd;border-color:#0d6efd;background-image:url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M6 10l3 3 6-6'/%3E%3C/svg%3E")}#jpdictionary del{color:#6c757d!important}</style><style id="mttstyle">
+    #mttContainer {
+      left: 0 !important;
+      top: 0 !important;
+      position: fixed !important;
+      z-index: 100000200 !important;
+      width: 1000px !important;
+      margin-left: -500px !important;
+      background-color: #00000000  !important;
+      pointer-events: none !important;
+    }
+    .bootstrapiso .tooltip {
+      width:auto  !important;
+      height:auto  !important;
+      background:transparent  !important;
+      border:none !important;
+      border-radius: 0px !important;
+      visibility: visible  !important;
+      pointer-events: none !important;
+    }
+    .bootstrapiso .tooltip-inner {
+      font-size: 14px  !important;
+      max-width: 200px  !important;
+      text-align: center !important;
+      backdrop-filter: blur(15px)  !important; 
+      background-color: #e6f9ff !important;
+      color: #000 !important;
+      border-radius: .25rem !important;
+      pointer-events: none !important;
+    }
+    .bootstrapiso .arrow::before {
+      border-top-color: #b3ecff !important;
+      border-bottom-color: #b3ecff !important;
+    }
+    </style></head>
+<body __processed_bb96e785-d7ad-4e0f-8da6-1a98064fc517__="true" bis_register="W3sibWFzdGVyIjp0cnVlLCJleHRlbnNpb25JZCI6ImVwcGlvY2VtaG1ubGJoanBsY2drb2ZjaWllZ29tY29uIiwiYWRibG9ja2VyU3RhdHVzIjp7IkRJU1BMQVkiOiJlbmFibGVkIiwiRkFDRUJPT0siOiJlbmFibGVkIiwiVFdJVFRFUiI6ImVuYWJsZWQiLCJSRURESVQiOiJlbmFibGVkIiwiUElOVEVSRVNUIjoiZW5hYmxlZCIsIklOU1RBR1JBTSI6ImVuYWJsZWQiLCJUSUtUT0siOiJkaXNhYmxlZCIsIkxJTktFRElOIjoiZW5hYmxlZCIsIkNPTkZJRyI6ImRpc2FibGVkIn0sInZlcnNpb24iOiIyLjAuMzgiLCJzY29yZSI6MjAwMzgwfV0=">
+
+<a href="#inicio"><img class="estrella" style="width:30px;margin-left:20px;margin-top:20px;position:fixed" src="https://static.vecteezy.com/system/resources/thumbnails/024/280/430/small_2x/sparkle-stars-white-png.png"></a>
+<br>
+<div id="inicio" style="width: 1000px;height:auto; background-color: #ffffff;margin-left:160px;margin-top:80px;border-radius:20px" bis_skin_checked="1">
+  <br>
+<a href="ikizu.html"><img class="back" src="https://i.ibb.co/zT0WTGSy/Proyecto-nuevo-4.png"></a>
+  
+  <h1 style="margin-left:370px;color:#ffdd3c"><ruby>浅草<rt>あさくさ</rt>Guilty Girlの<ruby>歌<rt>うた</rt></ruby></ruby></h1>
+
+<div class="caja" bis_skin_checked="1">
