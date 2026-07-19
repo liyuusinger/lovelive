@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html lang="es" data-cursorstyle="true" speedupyoutubeads="false" resize="225,400"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/x-icon" href="../pluma.png">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kurenaido&amp;display=swap" rel="stylesheet">
+<title>夏色えがおで1,2,Jump!</title>
+<style>
+html {
+  scroll-behavior: smooth;
+}
+body {
+  background-color: #8bc4e8;
+  font-family: "Zen Kurenaido", sans-serif;
+}
+h1 {
+ font-family: "Zen Kurenaido", sans-serif;
+}
+ruby {
+  ruby-align: center; /* comportamiento normal */
+}
+
+/* SOLO cuando el ruby tiene texto inmediatamente después */
+ruby:has(+ :not(rt)):has(+ :not(ruby)) {
+  ruby-align: start;
+}
+a {
+text-decoration: none;
+color: inherit;
+}
+
+.boton {
+  background-color: white;     /* fondo blanco */
+  color: black;                /* texto negro (podés cambiarlo) */
+  border: 1px solid #64aad5;    /* borde amarillo */
+  padding: 0px 20px;          /* tamaño del botón */
+  cursor: pointer;             /* cursor tipo mano */
+  transition: background-color 0.3s, color 0.3s; /* transición suave */
+}
+
+.boton:hover {
+  background-color: #64aad5;    /* fondo amarillo al pasar el mouse */
+  color: white;                /* texto blanco al pasar el mouse */
+}
+  .btnlinea {
+      background-color: white;
+      color:#64aad5;
+      font-size:15px;
+      border: solid 1px #64aad5;
+      width:30px;
+      height:30px;
+      border-radius: 20%;
+      margin: 2px;
+  }
+  
+  .btnlinea:hover {
+      background: #64aad5;
+      color: white;
+	cursor:pointer;
+  }
+
+.carousel-container { 
+      width: 450px; 
+      margin: 40px auto;
+      padding: 20px;
+      
+    }
+
+    .carousel {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .flecha {
+      background-color:white;
+color:#64aad5;
+width:45px;
+height:45px;
+border: 1px solid #64aad5;
+border-radius:50%;
+font-size:28px;
+cursor:pointer;
+padding-bottom:5px;
+transition: background-color 0.4s, color 0.4s; /* transición suave */
+    }
+.flecha:hover {
+	color: white;
+	background-color:#64aad5
+}
+    .tarjeta {
+      border: solid 1px black;
+      width: 300px;
+      padding: 20px;
+      border-radius: 10px;
+      margin: 0 auto;
+    }
+
+    .tarjeta h1 {
+      margin: 0;
+    }
+
+    .contenedor-tarjeta {
+      display: flex;
+      align-items: center;
+    }
+  .circulo {
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  line-height: 25px;
+  text-align: center;
+  border: 1px solid #64aad5;
+  border-radius: 50%;
+  }
+  html, body {
+  overflow-x: hidden;
+}
+  table {
+    margin-left:30px;
+    border-collapse: collapse;
+    margin-top: 20px;
+    width: 800px;
+    border-radius:100px;
+  }
+  th, td {
+    border: 1px solid #64aad5;
+    padding: 8px;
+    text-align: center;
+    vertical-align: middle;
+  }
+  th {
+    background-color: #64aad5;
+    color: white;
+    
+  }
+
+    #popup1 {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.5);
+    z-index: 1000;
+    width: 800px;
+    max-height: 80vh; /* No más alto que el 80% de la pantalla */
+    overflow: hidden; /* Evita que crezca */
+  }
+
+  /* Fondo oscuro detrás del popup */
+  #overlay {
+    display: none; /* Oculto al inicio */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 900;
+  }
+  #table-container {
+    max-height: 60vh; /* Altura máxima del área de la tabla */
+    overflow-y: auto; /* Scroll vertical */
+  }
+  #kanji-table th:last-child {
+    cursor: pointer;
+}
+  span {
+    color: black;
+    box-shadow: inset 0 -0.1em 0 #64aad5;
+    margin-bottom:0;
+  }
+
+  .container {
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  width: 90%;
+  margin: 2vh auto 0;  /* centrado horizontal */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+}
+.linea h1 {
+  margin: 0;
+  font-size: 18px;          /* MISMO tamaño que el texto original */
+  text-align: center;
+  color: black;             /* Igual que la línea original */
+  cursor: pointer;
+  word-break: break-word;
+}
+
+/* Traducción — ahora visualmente igual, solo color diferente */
+.traduccion h1 {
+  margin: 0;
+  font-size: 15px;          /* MISMO tamaño para que coincidan */
+  color: #64aad5;           /* amarillo */
+  text-align: left;       /* centradas */
+}
+.bloque {
+  margin-bottom: 15px;
+}
+
+.traduccion {
+  display: block;
+  width: 100%;
+  text-align: left;
+  box-sizing: border-box;
+}
+
+
+.traduccion h1 {
+  margin: 0;
+  font-size: 15px;
+  color: #64aad5;
+  width: 100%;
+  display: inline-block;
+  text-align: left;
+}
+  .content {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    border-radius: 12px;
+    border: 1px solid #8bc4e8;
+    padding: 20px;
+  }
+  .back {
+      height:20px;
+      margin-left:30px;
+      margin-top:10px;
+  }
+  .caja {
+      border-radius:20px;
+      border:solid 2px #8bc4e8;
+      width:870px;
+      display: block;
+      margin-top:50px;
+      margin-left:60px;
+      padding-top:30px;
+      padding-bottom:30px;
+  }
+  .caja1 {
+      display:flex;
+  }
+  .divisor {
+      width:350px;
+      margin-left:320px;
+      filter: hue-rotate(180deg);
+  }
+.btn-eliminar-tarjeta:hover {
+  background:#ff2222 !important;
+}
+[contenteditable="true"] {
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Por defecto en desktop: mostrar desktop, ocultar mobile */
+.trad-mobile { display: none; }
+.trad-desktop { display: block; }
+
+/* En mobile real: mostrar mobile, ocultar desktop */
+@media (max-width: 700px) {
+  .trad-mobile { display: block; }
+  .trad-desktop { display: none; }
+}
+
+/* Cuando el toggle activa vista mobile en desktop */
+body.vista-mobile .trad-mobile { display: block; }
+body.vista-mobile .trad-desktop { display: none; }
+@media (max-width: 700px) {
+
+  /* ── WRAPPER PRINCIPAL ── */
+  #inicio {
+    width: 95% !important;
+    margin: 20px auto 0 !important;
+    padding: 15px !important;
+    box-sizing: border-box !important;
+  }
+
+  body {
+    overflow-x: hidden !important;
+  }
+
+  #secciones-wrapper {
+    width: 100% !important;
+    overflow-x: hidden !important;
+  }
+
+  /* ── CAJA PORTADA (imagen + texto) ── */
+  .caja {
+    width: 100% !important;
+    margin: 16px 0 !important;
+    padding: 16px !important;
+    box-sizing: border-box !important;
+  }
+
+  .caja1 {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+
+  .imagen {
+    width: 85% !important;
+    max-width: 300px !important;
+    height: auto !important;
+    margin: 0 auto 16px !important;
+  }
+
+  .parrafo {
+    width: 100% !important;
+    margin: 0 auto !important;
+    font-size: 15px !important;
+    text-align: left !important;
+  }
+
+  .caja2 {
+    display: flex !important;
+    justify-content: center !important;
+    margin: 16px auto 0 !important;
+  }
+
+  .caja2 iframe {
+    width: 100% !important;
+    max-width: 280px !important;
+  }
+
+  /* ── FLECHA BACK (arriba izquierda) ── */
+  .back {
+    height: 13px !important;
+    margin-left: 8px !important;
+  }
+
+  /* ── TÍTULOS ── */
+  h1 {
+    text-align: center !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    font-size: 15px !important;
+  }
+
+  /* título principal de la canción */
+  #inicio > h1 {
+    font-size: 18px !important;
+  }
+
+  /* títulos de sección (nombre de la canción en amarillo) */
+  [id^="titulo-"] {
+    font-size: 19px !important;
+    margin: 8px 0 !important;
+  }
+
+  /* ── LÍNEAS DE LETRA ── */
+  .linea h1 {
+    font-size: 14px !important;
+  }
+
+  .traduccion h1 {
+    font-size: 12px !important;
+  }
+
+  .bloque {
+    margin-bottom: 8px !important;
+  }
+
+  /* ── SEPARADOR GIF ── */
+  .divisor {
+    width: 75% !important;
+    max-width: 270px !important;
+    margin: 6px auto !important;
+    display: block !important;
+  }
+
+  /* ── SECCIÓN DE LETRA (contenedor de líneas) ── */
+  [id^="contenedor-"] {
+    width: 95% !important;
+    margin: 0 auto !important;
+  }
+
+  /* ── SECCIÓN KANJI ── */
+  [id^="kanji-"] {
+    width: 100% !important;
+    margin-left: 0 !important;
+    padding: 10px 0 6px !important;
+    box-sizing: border-box !important;
+  }
+
+  /* título 新しい漢字 */
+  [id^="kanji-"] > h1 {
+    font-size: 18px !important;
+    margin: 6px 0 !important;
+  }
+
+  /* ── CARRUSEL ── */
+  .carousel-container {
+    width: 100% !important;
+    max-width: 300px !important;
+    margin: 6px auto !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  .carousel {
+    justify-content: center !important;
+    gap: 6px !important;
+  }
+
+  .flecha {
+    width: 32px !important;
+    height: 32px !important;
+    font-size: 18px !important;
+    flex-shrink: 0 !important;
+  }
+
+  /* ── TARJETA KANJI ── */
+  .tarjeta, .kanji-card {
+    width: auto !important;
+    max-width: 200px !important;
+    padding: 8px 10px !important;
+    box-sizing: border-box !important;
+    margin: 0 auto !important;
+  }
+
+  .contenedor-tarjeta {
+    flex: 1 !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    min-width: 0 !important;
+  }
+
+  .kanji-card h1 {
+    font-size: 13px !important;
+    line-height: 1.4 !important;
+  }
+
+  .kanji-card h1.character {
+  font-size: 60px !important;
+  margin: 0 !important;
+}
+
+  /* ── BOTONES ボード y ＋ ── */
+  .carousel-container > div:last-child {
+    gap: 8px !important;
+    margin-top: 8px !important;
+  }
+
+  .carousel-container .boton {
+    height: 55px !important;
+    width: 80px !important;
+  }
+
+  .carousel-container .boton h1 {
+    font-size: 12px !important;
+  }
+
+  /* ── SPOTIFY IFRAME ── */
+  /* ── SPOTIFY IFRAME ── */
+  .spotify-iframe {
+    width: 220px !important;
+    height: 80px !important;
+    min-width: 0 !important;
+    display: block !important;
+    margin-bottom: 10px;
+  }
+
+  .caja2 {
+    display: flex !important;
+    justify-content: center !important;
+    margin: 16px auto 0 !important;
+    overflow: hidden !important;
+  }
+
+  /* ── POPUP TABLA ── */
+  .tabla-div {
+    width: 92vw !important;
+    max-width: 370px !important;
+    padding: 14px !important;
+    box-sizing: border-box !important;
+  }
+
+  .tabla-div-2 {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    position: relative !important;
+  }
+
+  .tabla-div-2 h1 {
+    margin: 0 auto !important;
+    font-size: 16px !important;
+    text-align: center !important;
+  }
+
+  .cruz {
+    display: block !important;
+    position: absolute !important;
+    right: 0 !important;
+    top: 0 !important;
+  }
+
+  [id^="table-container-"] {
+    width: 100% !important;
+    overflow-x: auto !important;
+  }
+
+  [id^="kanji-table-"] {
+    width: 100% !important;
+    min-width: 280px !important;
+    margin-left: 0 !important;
+    font-size: 13px !important;
+  }
+
+  [id^="kanji-table-"] td:first-child {
+    font-size: 32px !important;
+  }
+
+  /* ── BOTONES GLOBALES ── */
+  #inicio > div[style*="text-align:center"] {
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+  }
+
+  .boton {
+    font-size: 13px !important;
+  }
+
+  /* ── BOTÓN BACK Y ESTRELLA ── */
+  .back {
+    float: left !important;
+    margin-left: 10px !important;
+  }
+
+  .estrella {
+    filter: drop-shadow(0 0 5px #64aad5) !important;
+  }
+
+  /* ── TRADUCCIÓN ── */
+  .traduccion h1 {
+    text-align: left !important;
+  }
+
+  /* ── BOTONES DUPLICAR/BORRAR SECCIÓN ── */
+  #inicio > div > button.boton {
+    width: 160px !important;
+    font-size: 13px !important;
+  }
+
+  /* ── LINKS DESCARGAR/SUBIR ── */
+  .pie, .pie2 {
+    padding: 0 8px !important;
+  }
+
+  table {
+    margin-left: 0 !important;
+    width: 100% !important;
+  }
+}
+
+</style>
+<style type="text/css">#jpdictionary * :not(svg,path){all:revert}#jpdictionary svg{width:auto!important}#jpdictionary{font-size:18px!important;font-family:Arial,ヒラギノ角ゴ Pro W3,Hiragino Kaku Gothic Pro,Osaka,メイリオ,Meiryo,ＭＳ Ｐゴシック,MS PGothic,sans-serif!important;color:#000!important;line-height:1.5!important;text-align:left!important}#jpdictionary .o-cpt{cursor:pointer}#jpdictionary .o-result-item{line-height:1.5;display:block;margin-right:0;cursor:pointer}#jpdictionary .o-result-item:hover{border-color:#c6d6ef!important}#jpdictionary .o-selected-result{max-height:300px;overflow-y:scroll}#jpdictionary .o-selected-result::-webkit-scrollbar{width:13px}#jpdictionary .o-selected-result::-webkit-scrollbar-thumb{border-radius:10px;-webkit-box-shadow:inset 3px 0 0 3px #fff;background:rgba(0,0,0,.2)}#jpdictionary .o-pop-nav div{font-size:14px;padding:3.2px 8px}#jpdictionary .o-pop-speak{margin-top:5px;margin-right:8px;font-size:16px;cursor:pointer}#jpdictionary .o-search-mobile{z-index:2147483647;position:absolute;cursor:pointer;display:none}#jpdictionary .o-popup-tag{z-index:99999;position:absolute;display:none;padding:10px 5px 10px 10px}#jpdictionary .o-bg-white{background-color:#fff!important}#jpdictionary .o-border{border:1px solid #dee2e6!important}#jpdictionary .o-rounded{border-radius:4px!important}#jpdictionary .o-shadow{box-shadow:0 8px 16px rgba(0,0,0,.15)!important}#jpdictionary .o-btn-close{box-sizing:content-box;width:16px;height:16px;padding:4px 4px;color:#000;background:transparent url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M.293.293a1 1 0 011.414 0L8 6.586 14.293.293a1 1 0 111.414 1.414L9.414 8l6.293 6.293a1 1 0 01-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 01-1.414-1.414L6.586 8 .293 1.707a1 1 0 010-1.414z'/%3E%3C/svg%3E") 50%/16px auto no-repeat;border:0;border-radius:4px;opacity:.5;cursor:pointer}#jpdictionary .o-btn-close:hover{opacity:.75}#jpdictionary .o-me-1{margin-right:4px!important}#jpdictionary .o-end-0{right:0!important}#jpdictionary .o-top-0{top:0!important}#jpdictionary .o-position-absolute{position:absolute!important}#jpdictionary ul{padding-left:32px;display:block;list-style-type:disc;-webkit-margin-before:16px;margin-block-start:16px;-webkit-margin-after:16px;margin-block-end:16px;-webkit-margin-start:0;margin-inline-start:0;-webkit-margin-end:0;margin-inline-end:0;-webkit-padding-start:40px;padding-inline-start:40px}#jpdictionary .o-pt-1{padding-top:4px!important}#jpdictionary .mark,#jpdictionary mark{padding:0!important;background:linear-gradient(transparent 60%,#ff6 0)!important}#jpdictionary .o-mt-1{margin-top:4px!important}#jpdictionary .o-p-2{padding:8px!important}#jpdictionary .o-mb-1{margin-bottom:4px!important}#jpdictionary .o-border-3{border-width:3px!important}#jpdictionary .o-text-secondary{color:#6c757d!important}#jpdictionary .o-text-primary{cursor:pointer;color:#0d6efd}#jpdictionary .o-text-primary:hover{text-decoration:underline}#jpdictionary .o-text-black-50{color:rgba(0,0,0,.5)!important}#jpdictionary .o-w-100{width:100%!important}#jpdictionary .o-link-danger{color:#dc3545}#jpdictionary .o-link-danger:hover{color:#0d6efd}#jpdictionary .o-text-decoration-none{text-decoration:none!important}#jpdictionary .o-fs-6{font-size:16px!important}#jpdictionary .o-ms-1{margin-left:4px!important}#jpdictionary .o-mt-2{margin-top:8px!important}#jpdictionary .o-float-start{float:left!important}#jpdictionary label{display:inline-block}#jpdictionary .o-float-end{float:right!important}#jpdictionary .o-link-secondary{color:#6c757d!important}#jpdictionary .o-result-item .o-inflect{font-size:14px;color:#666;overflow:hidden;text-overflow:ellipsis}#jpdictionary .o-nav-tabs{border-bottom:1px solid #dee2e6}#jpdictionary .o-nav{display:flex;flex-wrap:wrap;padding-left:0;margin-bottom:0;list-style:none}#jpdictionary ul{margin-top:0;margin-bottom:16px}#jpdictionary li{display:list-item;text-align:-webkit-match-parent}#jpdictionary .o-nav-tabs .o-nav-item.show .o-nav-link,#jpdictionary .o-nav-tabs .o-nav-link.o-active{color:#495057;background-color:#fff;border-color:#dee2e6 #dee2e6 #fff}#jpdictionary .o-nav-link{display:block;padding:8px 16px;color:#0d6efd;text-decoration:none;transition:color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out;cursor:pointer}#jpdictionary .o-nav-tabs .o-nav-link{margin-bottom:-1px;background:0 0;border:1px solid transparent;border-top-left-radius:4px;border-top-right-radius:4px;line-height:1.5}#jpdictionary svg:not(:host).o-svg-inline--fa,#jpdictionary svg:not(:root).o-svg-inline--fa{overflow:visible;box-sizing:content-box}#jpdictionary .o-svg-inline--fa{display:inline-block;height:16px;overflow:visible;vertical-align:-2px}#jpdictionary .o-form-check{font-size:16px;font-weight:400;line-height:1.5;color:#212529;-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent;box-sizing:border-box;display:block;min-height:1.5rem;padding-left:1.5em;margin-bottom:0}#jpdictionary .o-form-check-input{box-sizing:border-box;margin:0;font-family:inherit;font-size:inherit;line-height:inherit;width:1em;height:1em;margin-top:.25em;vertical-align:top;background-color:#fff;background-repeat:no-repeat;background-position:50%;background-size:contain;border:1px solid rgba(0,0,0,.25);-webkit-appearance:none;-moz-appearance:none;appearance:none;-webkit-print-color-adjust:exact;float:left;margin-left:-1.5em;border-radius:.25em}#jpdictionary .o-form-check-input:before{content:""}#jpdictionary .o-form-check-input:checked[type=checkbox]{background-color:#0d6efd;border-color:#0d6efd;background-image:url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M6 10l3 3 6-6'/%3E%3C/svg%3E")}#jpdictionary del{color:#6c757d!important}</style><style id="mttstyle">
+    #mttContainer {
+      left: 0 !important;
+      top: 0 !important;
+      position: fixed !important;
+      z-index: 100000200 !important;
+      width: 1000px !important;
+      margin-left: -500px !important;
+      background-color: #00000000  !important;
+      pointer-events: none !important;
+    }
+    .bootstrapiso .tooltip {
+      width:auto  !important;
+      height:auto  !important;
+      background:transparent  !important;
+      border:none !important;
+      border-radius: 0px !important;
+      visibility: visible  !important;
+      pointer-events: none !important;
+    }
+    .bootstrapiso .tooltip-inner {
+      font-size: 14px  !important;
+      max-width: 200px  !important;
+      text-align: center !important;
+      backdrop-filter: blur(15px)  !important; 
+      background-color: #e6f9ff !important;
+      color: #000 !important;
+      border-radius: .25rem !important;
+      pointer-events: none !important;
+    }
+    .bootstrapiso .arrow::before {
+      border-top-color: #b3ecff !important;
+      border-bottom-color: #b3ecff !important;
+    }
+    </style></head>
+<body __processed_bb96e785-d7ad-4e0f-8da6-1a98064fc517__="true" bis_register="W3sibWFzdGVyIjp0cnVlLCJleHRlbnNpb25JZCI6ImVwcGlvY2VtaG1ubGJoanBsY2drb2ZjaWllZ29tY29uIiwiYWRibG9ja2VyU3RhdHVzIjp7IkRJU1BMQVkiOiJlbmFibGVkIiwiRkFDRUJPT0siOiJlbmFibGVkIiwiVFdJVFRFUiI6ImVuYWJsZWQiLCJSRURESVQiOiJlbmFibGVkIiwiUElOVEVSRVNUIjoiZW5hYmxlZCIsIklOU1RBR1JBTSI6ImVuYWJsZWQiLCJUSUtUT0siOiJkaXNhYmxlZCIsIkxJTktFRElOIjoiZW5hYmxlZCIsIkNPTkZJRyI6ImRpc2FibGVkIn0sInZlcnNpb24iOiIyLjAuMzgiLCJzY29yZSI6MjAwMzgwfV0=" class="">
+
+<a href="#inicio"><img class="estrella" style="width:30px;margin-left:20px;margin-top:20px;position:fixed" src="https://static.vecteezy.com/system/resources/thumbnails/024/280/430/small_2x/sparkle-stars-white-png.png"></a>
+<br>
+<div id="inicio" style="width: 1000px;height:auto; background-color: #ffffff;margin-left:160px;margin-top:80px;border-radius:20px" bis_skin_checked="1">
+  <br>
+<a href="ikizu.html"><img class="back" src="https://i.ibb.co/zT0WTGSy/Proyecto-nuevo-4.png"></a>
+  
+  <h1 style="margin-left:370px;color:#64aad5"><ruby>夏色<rt>なついろ</rt>えがおで 1,2,Jump!</ruby></h1>
+
+<div class="caja" bis_skin_checked="1">
+<div class="caja1" bis_skin_checked="1">
+<img class="imagen" style="width:350px; margin-left:30px;height:350px" src="https://static.wikia.nocookie.net/love-live/images/7/75/Natsuiro_Egao_de_1%2C_2%2C_Jump%21_-_cover.jpg/revision/latest/scale-to-width-down/1000?cb=20160725135808">
+<div style="display:block" bis_skin_checked="1">
+<h1 class="parrafo" style="font-size:17px;width:400px;margin-left:40px;">夏色えがおで 1,2,Jump! (lit. With Summer-colored Smiles 1,2,Jump!) is μ’s third single released on August 24, 2011 on both CD and DVD<br><br>1. <span style="color:#64aad5"><a style="color:#64aad5" id="lista-item-1" href="#seccion-s1">夏色えがおで1,2,Jump!</a></span> (lit. With Summer-colored Smiles 1,2,Jump!)
+<br>2. <span style="color:#64aad5" id="lista-item-2"><a href"mermaid_festa_vol_1.html"="">Mermaid festa vol.1</a></span><a href"mermaid_festa_vol_1.html"="">
+<br>3. 夏色えがおで1,2,Jump! (Off Vocal)
+<br>4. Mermaid festa vol.1 (Off Vocal)</a></h1><a href"mermaid_festa_vol_1.html"="">
+<div class="caja2" style="display:flex; align-items:center; gap:20px; margin-top:30px; margin-left:40px;" bis_skin_checked="1">
+  
+<iframe data-testid="embed-iframe" style="border-radius:12px;height:80px;width:280px" src="https://open.spotify.com/embed/track/5dKxIFHbLEF74JCIc30zNP?utm_source=generator&amp;si=464e1bba34464de9" width="100%" height="152" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+</div>
+</a></div><a href"mermaid_festa_vol_1.html"="">
+</a></div><a href"mermaid_festa_vol_1.html"="">
+
+</a></div><a href"mermaid_festa_vol_1.html"="">
+  
+  <!-- CONTENEDOR DE SECCIONES DUPLICABLES -->
+<div id="secciones-wrapper" style="margin-top: 40px"><div class="seccion-duplicable" id="seccion-s1">
+      <img class="divisor" src="https://i.ibb.co/HT7j1v18/tumblr-lrm9au-Ce8t1qd8xmf.gif">
+      <h1 id="titulo-s1" style="color:#64aad5;text-align:center"><ruby>夏色<rt>なついろ</rt></ruby>えがおで 1,2,Jump!</h1>
+       <!-- <--- Aquí se inserta el reproductor de Spotify debajo del título -->
+      <div id="contenedor-s1" style="width:400px; margin: 0 auto; text-align: center;"><div class="bloque"><div class="linea"><h1><span><span style="background-color: #8bc4e899; color: black; padding: 1px 5px; border-radius: 4px; font-weight: bold; box-shadow: none;">なぜか</span></span> <span><ruby>見<rt>み</rt></ruby>えた</span> <span><ruby>明日<rt>あした</rt></ruby><span class="circulo">の</span>ときめき…</span></h1></div><div class="traduccion trad-desktop"><h1 class="trad-texto" style="white-space:pre-wrap">          por alguna razón pude ver la emoción de mañana</h1></div><div class="traduccion trad-mobile"><h1 class="trad-texto-mobile" style="white-space:pre-wrap">      por alguna razón  pude ver    la emoción de mañana</h1></div></div><div class="bloque"><div class="linea"><h1><span><ruby>楽<rt>たの</rt></ruby>しくしちゃう<span class="circulo">よ</span></span></h1></div><div class="traduccion trad-desktop"><h1 class="trad-texto" style="white-space:pre-wrap">                            terminé haciendolo divertido</h1></div><div class="traduccion trad-mobile"><h1 class="trad-texto-mobile" style="white-space:pre-wrap">                           terminé haciéndolo divertido</h1></div></div><div class="bloque"><div class="linea"><h1><span><span style="background-color: #8bc4e899; color: black; padding: 1px 5px; border-radius: 4px; font-weight: bold; box-shadow: none;"><ruby>羽<rt>はね</rt></ruby></span><span class="circulo">が</span><span style="background-color: #8bc4e899; color: black; padding: 1px 5px; border-radius: 4px; font-weight: bold; box-shadow: none;"><ruby>生<rt>は</rt></ruby>えて</span></span> <span><ruby>私<rt>わたし</rt></ruby><span class="circulo">の</span>こころ<span class="circulo">は</span></span> <span><ruby>雲<rt>くも</rt></ruby><span class="circulo">の</span><ruby>上<rt>うえ</rt></ruby></span></h1></div><div class="traduccion trad-desktop"><h1 class="trad-texto" style="white-space:pre-wrap">           mis alas crecen y            mi corazón    arriba de las nubes</h1></div><div class="traduccion trad-mobile"><h1 class="trad-texto-mobile" style="white-space:pre-wrap">       mis alas crecen y         mi corazón       arriba de las nubes</h1></div></div><div class="bloque"><div class="linea"><h1><span><span style="background-color: #8bc4e899; color: black; padding: 1px 5px; border-radius: 4px; font-weight: bold; box-shadow: none;">さそわれて</span></span> <span><ruby>遠<rt>とお</rt></ruby>い<ruby>空<rt>そら</rt></ruby></span> <span><ruby>遠<rt>とお</rt></ruby>い<ruby>海<rt>うみ</rt></ruby></span></h1></div><div class="traduccion trad-desktop"><h1 class="trad-texto" style="white-space:pre-wrap">                          es invitado     lejano cielo lejano mar</h1></div><div class="traduccion trad-mobile"><h1 class="trad-texto-mobile" style="white-space:pre-wrap">                     es invitado y   lejano cielo lejano mar</h1></div></div><div class="bloque"><div class="linea"><h1><span>スピードだして</span> <span>F.L.Y!!</span></h1></div><div class="traduccion trad-desktop"><h1 class="trad-texto" style="white-space:pre-wrap">                              saca la velocidad       vuela</h1></div><div class="traduccion trad-mobile"><h1 class="trad-texto-mobile" style="white-space:pre-wrap">                             saca la velocidad     vuela</h1></div></div><div class="bloque"><div class="linea"><h1><span><span style="background-color: #8bc4e899; color: black; padding: 1px 5px; border-radius: 4px; font-weight: bold; box-shadow: none;">うんと</span>うんと</span> <span><span style="background-color: #8bc4e899; color: black; padding: 1px 5px; border-radius: 4px; font-weight: bold; box-shadow: none;"><ruby>陽射<rt>ひざ</rt></ruby>し</span></span> <span><span style="background-color: #8bc4e899; color: black; padding: 1px 5px; border-radius: 4px; font-weight: bold; box-shadow: none;"><ruby>浴<rt>あ</rt></ruby>び</span>ながら</span></h1></div><div class="traduccion trad-desktop"><h1 class="trad-texto" style="white-space:pre-wrap">                   mucha mucha       luz solar   mientras me baña</h1></div><div class="traduccion trad-mobile"><h1 class="trad-texto-mobile" style="white-space:pre-wrap">                 mucha mucha       luz solar   mientras me baña</h1></div></div><div class="bloque"><div class="linea"><h1><span>(キラキラキラって</span> <span>まぶしい</span> <span><ruby>気分<rt>きぶん</rt></ruby>)</span></h1></div><div class="traduccion trad-desktop"><h1 class="trad-texto" style="white-space:pre-wrap">                            brillante            deslumbrante  ánimo</h1></div><div class="traduccion trad-mobile"><h1 class="trad-texto-mobile" style="white-space:pre-wrap">                        brillante            deslumbrante  ánimo</h1></div></div><div class="bloque"><div class="linea"><h1><span>(キラキラキラリ</span> <span><ruby>落<rt>お</rt></ruby>ちる</span> <span>アセ<span class="circulo">に</span>)</span></h1></div><div class="traduccion trad-desktop"><h1 class="trad-texto" style="white-space:pre-wrap">                           brilante                caer         sudor</h1></div><div class="traduccion trad-mobile"><h1 class="trad-texto-mobile" style="white-space:pre-wrap">                        brillante              caer        sudor</h1></div></div><div class="bloque"><div class="linea"><h1><span><ruby>輝<rt>かがや</rt></ruby>く<span style="background-color: #8bc4e899; color: black; padding: 1px 5px; border-radius: 4px; font-weight: bold; box-shadow: none;"><ruby>思<rt>おも</rt></ruby>い<ruby>出<rt>で</rt></ruby></span></span> <span><span style="background-color: #8bc4e899; color: black; padding: 1px 5px; border-radius: 4px; font-weight: bold; box-shadow: none;">かさねよう</span></span></h1></div><div class="traduccion trad-desktop"><h1 class="trad-texto" style="white-space:pre-wrap">                     recuerdos que brillan   acumulemos</h1></div><div class="traduccion trad-mobile"><h1 class="trad-texto-mobile" style="white-space:pre-wrap">                  recuerdos que brillan   acumulemos</h1></div></div><div class="bloque"><div class="linea"><h1><span>この</span> <span><span style="background-color: #8bc4e899; color: black; padding: 1px 5px; border-radius: 4px; font-weight: bold; box-shadow: none;">たった</span><ruby>一度<rt>いちど</rt></ruby><span class="circulo">の</span></span> <span><ruby>季節<rt>きせつ</rt></ruby><span class="circulo">を</span></span> <span><ruby>探<rt>さが</rt></ruby>していたんだ</span></h1></div><div class="traduccion trad-desktop"><h1 class="trad-texto" style="white-space:pre-wrap">     esta           única vez             estación   es que quiero buscar</h1></div><div class="traduccion trad-mobile"><h1 class="trad-texto-mobile" style="white-space:pre-wrap">  esta         única vez             estación    es que quiero buscar</h1></div></div><div class="bloque"><div class="linea"><h1><span><ruby>真夏<rt>まなつ</rt></ruby><span class="circulo">の</span></span> <span><span style="background-color: #8bc4e899; color: black; padding: 1px 5px; border-radius: 4px; font-weight: bold; box-shadow: none;">せいだ</span><span class="circulo">よ</span></span> <span>1,2,Jump!</span></h1></div><div class="traduccion trad-desktop"><h1 class="trad-texto" style="white-space:pre-wrap">                   pleno verano   debido a</h1></div><div class="traduccion trad-mobile"><h1 class="trad-texto-mobile" style="white-space:pre-wrap">                pleno verano    debido a</h1></div></div><div class="bloque"><div class="linea"><h1><span><span style="background-color: #8bc4e899; color: black; padding: 1px 5px; border-radius: 4px; font-weight: bold; box-shadow: none;">うなずいて</span></span> <span>Vacation</span></h1></div><div class="traduccion trad-desktop"><h1 class="trad-texto" style="white-space:pre-wrap">                                asintiendo</h1></div><div class="traduccion trad-mobile"><h1 class="trad-texto-mobile" style="white-space:pre-wrap">                                asintiendo</h1></div></div><div class="bloque"><div class="linea"><h1><span>ぴかぴか</span> <span>フェイス</span> <span>あげたい</span></h1></div><div class="traduccion trad-desktop"><h1 class="trad-texto" style="white-space:pre-wrap">                  resplandeciente     cara       quiero darte</h1></div><div class="traduccion trad-mobile"><h1 class="trad-texto-mobile" style="white-space:pre-wrap">                     reluciente        cara      quiero darte</h1></div></div><div class="bloque"><div class="linea"><h1><span><ruby>暑<rt>あつ</rt></ruby>いけど</span> <span><ruby>熱<rt>あつ</rt></ruby>いから</span> <span><ruby>嬉<rt>うれ</rt></ruby>しくて</span> <span><ruby>楽<rt>たの</rt></ruby>しいね</span></h1></div><div class="traduccion trad-desktop"><h1 class="trad-texto" style="white-space:pre-wrap">  está caluroso pero como está caliente estoy feliz y es divertido</h1></div><div class="traduccion trad-mobile"><h1 class="trad-texto-mobile" style="white-space:pre-wrap"> es caluroso pero como está caliente estoy feliz y me divierto</h1></div></div><div class="bloque"><div class="linea"><h1><span><span style="background-color: #8bc4e899; color: black; padding: 1px 5px; border-radius: 4px; font-weight: bold; box-shadow: none;">すれ<ruby>違<rt>ちが</rt></ruby>って</span></span> <span><span style="background-color: #8bc4e899; color: black; padding: 1px 5px; border-radius: 4px; font-weight: bold; box-shadow: none;"><ruby>互<rt>たが</rt></ruby>いに</span>ときめく…</span></h1></div><div class="traduccion trad-desktop"><h1 class="trad-texto" style="white-space:pre-wrap">                nos encontramos y  mutuamente la emoción</h1></div><div class="traduccion trad-mobile"><h1 class="trad-texto-mobile" style="white-space:pre-wrap">            nos encontramos y  mutuamente la emoción</h1></div></div><div class="bloque"><div class="linea"><h1><span>おいかける</span> <span>そうだ</span> <span>Shinin'</span> <span>そうだ</span> <span>Dreamin'</span></h1></div><div class="traduccion trad-desktop"><h1 class="trad-texto" style="white-space:pre-wrap">          perseguimos      así es                    así es</h1></div><div class="traduccion trad-mobile"><h1 class="trad-texto-mobile" style="white-space:pre-wrap">        perseguimos       así es                  así es</h1></div></div><div class="bloque"><div class="linea"><h1><span><span style="background-color: #8bc4e899; color: black; padding: 1px 5px; border-radius: 4px; font-weight: bold; box-shadow: none;">ふしぎな</span></span> <span><span style="background-color: #8bc4e899; color: black; padding: 1px 5px; border-radius: 4px; font-weight: bold; box-shadow: none;"><ruby>予感<rt>よかん</rt></ruby></span><span class="circulo">で</span></span></h1></div><div class="traduccion trad-desktop"><h1 class="trad-texto" style="white-space:pre-wrap">                               maravilloso presentimiento</h1></div><div class="traduccion trad-mobile"><h1 class="trad-texto-mobile" style="white-space:pre-wrap">　　　　　　    maravilloso  presentimiento  </h1></div></div><div class="bloque"><div class="linea"><h1><span><span style="background-color: #8bc4e899; color: black; padding: 1px 5px; border-radius: 4px; font-weight: bold; box-shadow: none;"><ruby>通<rt>とお</rt></ruby>りすぎた</span></span> <span><ruby>風<rt>かぜ</rt></ruby>から</span> <span><ruby>感<rt>かん</rt></ruby>じる<ruby>懐<rt>なつ</rt></ruby>かしさ</span></h1></div><div class="traduccion trad-desktop"><h1 class="trad-texto" style="white-space:pre-wrap">                      pasó     por el viento  sentimiento nostálgico</h1></div><div class="traduccion trad-mobile"><h1 class="trad-texto-mobile" style="white-space:pre-wrap">                    pasó      por el viento  sentimiento nostálgico</h1></div></div><div class="bloque"><div class="linea"><h1><span>みあげれば</span> <span><ruby>遠<rt>とお</rt></ruby>い<ruby>空<rt>そら</rt></ruby></span> <span><ruby>遠<rt>とお</rt></ruby>い<ruby>海<rt>うみ</rt></ruby></span></h1></div><div class="traduccion trad-desktop"><h1 class="trad-texto" style="white-space:pre-wrap">                   si miro hacia arriba  lejano cielo lejano mar</h1></div><div class="traduccion trad-mobile"><h1 class="trad-texto-mobile" style="white-space:pre-wrap">                 si miro hacia arriba  lejano cielo lejano mar</h1></div></div><div class="bloque"><div class="linea"><h1><span>やっとやっと</span> <span>ここ<span class="circulo">で</span></span> <span><ruby>会<rt>あ</rt></ruby>えたから</span></h1></div><div class="traduccion trad-desktop"><h1 class="trad-texto" style="white-space:pre-wrap">                  por fin por fin         aquí   nos pudimos ver porque  </h1></div><div class="traduccion trad-mobile"><h1 class="trad-texto-mobile" style="white-space:pre-wrap">              por fin por fin        aquí    nos pudimos ver porqué</h1></div></div><div class="bloque"><div class="linea"><h1><span><ruby>私<rt>わたし</rt></ruby><span class="circulo">と</span></span> <span><ruby>思<rt>おも</rt></ruby>い<ruby>出<rt>で</rt></ruby>つくろう<span class="circulo">よ</span></span></h1></div><div class="traduccion trad-desktop"><h1 class="trad-texto" style="white-space:pre-wrap">                        conmigo       hagamos recuerdos</h1></div><div class="traduccion trad-mobile"><h1 class="trad-texto-mobile" style="white-space:pre-wrap">                     conmigo       creemos recuerdos   </h1></div></div><div class="bloque"><div class="linea"><h1><span><ruby>熱<rt>あつ</rt></ruby>い<ruby>胸<rt>むね</rt></ruby><span class="circulo">の</span>なか<span class="circulo">で</span></span> <span><ruby>奇跡<rt>きせき</rt></ruby><span class="circulo">を</span><ruby>探<rt>さが</rt></ruby>していたんだ</span></h1></div><div class="traduccion trad-desktop"><h1 class="trad-texto" style="white-space:pre-wrap">    adentro de mi caliente pecho     quiero buscar un milagro</h1></div><div class="traduccion trad-mobile"><h1 class="trad-texto-mobile" style="white-space:pre-wrap"> adentro de mi caliente pecho    quiero buscar un milagro</h1></div></div><div class="bloque"><div class="linea"><h1><span><ruby>星<rt>ほし</rt></ruby>より<span style="background-color: #8bc4e899; color: black; padding: 1px 5px; border-radius: 4px; font-weight: bold; box-shadow: none;">たしかな</span></span> <span>1,2,Love!</span></h1></div><div class="traduccion trad-desktop"><h1 class="trad-texto" style="white-space:pre-wrap">                  más certero que las estrellas</h1></div><div class="traduccion trad-mobile"><h1 class="trad-texto-mobile" style="white-space:pre-wrap">                 más certero que las estrellas</h1></div></div><div class="bloque"><div class="linea"><h1><span><ruby>光<rt>ひかり</rt></ruby><span class="circulo">が</span><ruby>夜<rt>よる</rt></ruby><span class="circulo">を</span></span> <span><ruby>照<rt>て</rt></ruby>らせば</span></h1></div><div class="traduccion trad-desktop"><h1 class="trad-texto" style="white-space:pre-wrap">                          la luz de la noche  si la ilumino</h1></div><div class="traduccion trad-mobile"><h1 class="trad-texto-mobile" style="white-space:pre-wrap">                        la luz de la noche    si la ilumino</h1></div></div><div class="bloque"><div class="linea"><h1><span><ruby>未来<rt>みらい</rt></ruby><span class="circulo">が</span>ある<span class="circulo">よ</span>、</span> <span>あるよ<span class="circulo">ね</span>?</span></h1></div><div class="traduccion trad-desktop"><h1 class="trad-texto" style="white-space:pre-wrap">                         hay un futuro            lo hay, ¿verdad?</h1></div><div class="traduccion trad-mobile"><h1 class="trad-texto-mobile" style="white-space:pre-wrap">                      hay un futuro               lo hay, ¿verdad?</h1></div></div><div class="bloque"><div class="linea"><h1><span>どきどきハート</span> <span><span style="background-color: #8bc4e899; color: black; padding: 1px 5px; border-radius: 4px; font-weight: bold; box-shadow: none;">うちあげ</span></span></h1></div><div class="traduccion trad-desktop"><h1 class="trad-texto" style="white-space:pre-wrap">                        emocionado corazón    completado</h1></div><div class="traduccion trad-mobile"><h1 class="trad-texto-mobile" style="white-space:pre-wrap">                      emocionado corazón    completado</h1></div></div><div class="bloque"><div class="linea"><h1><span><span style="background-color: #8bc4e899; color: black; padding: 1px 5px; border-radius: 4px; font-weight: bold; box-shadow: none;"><ruby>希望<rt>きぼう</rt></ruby></span><span class="circulo">が</span>ある<span class="circulo">よ</span>、</span> <span>あるよ<span class="circulo">ね</span>?</span></h1></div><div class="traduccion trad-desktop"><h1 class="trad-texto" style="white-space:pre-wrap">                          hay esperanza          la hay, ¿verdad?</h1></div><div class="traduccion trad-mobile"><h1 class="trad-texto-mobile" style="white-space:pre-wrap">                      hay esperanza             la hay, ¿verdad?</h1></div></div><div class="bloque"><div class="linea"><h1><span><ruby>願<rt>ねが</rt></ruby>い<span class="circulo">を</span><ruby>言<rt>い</rt></ruby>って</span></h1></div><div class="traduccion trad-desktop"><h1 class="trad-texto" style="white-space:pre-wrap">                                         dí tu deseo</h1></div><div class="traduccion trad-mobile"><h1 class="trad-texto-mobile" style="white-space:pre-wrap">                                        dí tu deseo</h1></div></div></div>
+      
+      <img class="divisor" src="https://i.ibb.co/HT7j1v18/tumblr-lrm9au-Ce8t1qd8xmf.gif" style="margin-top:10px;">
+      <div id="kanji-s1" style="width:870px;display:block;margin-left:60px;padding-top:30px;padding-bottom:10px;">
+        <h1 style="text-align:center;color:#64aad5"><ruby>新<rt>あたら</rt></ruby>しい<ruby>漢字<rt>かんじ</rt></ruby></h1>
+        <div class="carousel-container">
+          <div class="carousel">
+            <button class="flecha" id="btn-ant-s1">‹</button>
+            <div class="contenedor-tarjeta" id="kanji-display-s1"><div class="kanji-card" style="cursor: default; border: 1px solid black; width: 300px; margin: 0px auto; padding: 0px 20px 20px; height: auto; border-radius: 10px; position: relative; display: block;">
+  <div style="margin-left:20px;display:flex; align-items: center;">
+    <div><h1 class="character" style="color:#64aad5; margin: 0; font-size:100px;">羽</h1></div>
+    <div style="margin-left:20px;">
+      <h1 style="font-size:17px; margin: 0;">
+        <span class="español" style="box-shadow: inset 0 0em 0 #64aad5;">Pluma</span><br>
+        くんよみ: <span class="kunyomi" style="color:#64aad5; box-shadow: inset 0 0em 0 #64aad5;">はね</span><br>
+        おんよみ: <span class="onyomi" style="color:#64aad5; box-shadow: inset 0 0em 0 #64aad5;">ウ</span></h1>
+    </div>
+  </div>
+  <div style="margin-top:10px; text-align:center;">
+    <h1 style="font-size:16px; margin: 0;">
+      <span style="color:#64aad5; box-shadow: inset 0 0em 0 #64aad5;">✦</span>&nbsp;<ruby>羽毛<rt>うもう</rt></ruby> - Plumas<br>
+      <span style="color:#64aad5; box-shadow: inset 0 0em 0 #64aad5;">✦</span>
+<span class="cancion" style="box-shadow: inset 0 0em 0 #64aad5"><ruby>羽根<rt>はね</rt></ruby></span> - Ala<br>
+      <span style="color:#64aad5; box-shadow: inset 0 0em 0 #64aad5;">✦</span>
+      Radicales: -</h1>
+  </div>
+</div><div class="kanji-card" style="cursor: default; border: 1px solid black; width: 300px; margin: 0px auto; padding: 0px 20px 20px; height: auto; border-radius: 10px; position: relative; display: none;">
+  <div style="margin-left:20px;display:flex; align-items: center;">
+    <div><h1 class="character" style="color:#64aad5; margin: 0; font-size:100px;">遠</h1></div>
+    <div style="margin-left:20px;">
+      <h1 style="font-size:17px; margin: 0;">
+        <span class="español" style="box-shadow: inset 0 0em 0 #64aad5;">Lejos</span><br>
+        くんよみ: <span class="kunyomi" style="color:#64aad5; box-shadow: inset 0 0em 0 #64aad5;">とお</span><br>
+        おんよみ: <span class="onyomi" style="color:#64aad5; box-shadow: inset 0 0em 0 #64aad5;">エン, オン</span></h1>
+    </div>
+  </div>
+  <div style="margin-top:10px; text-align:center;">
+    <h1 style="font-size:16px; margin: 0;">
+      <span style="color:#64aad5; box-shadow: inset 0 0em 0 #64aad5;">✦</span>&nbsp;<ruby>久<rt>く</rt></ruby><ruby>遠<rt>おん</rt></ruby> - Eternidad<br>
+      <span style="color:#64aad5; box-shadow: inset 0 0em 0 #64aad5;">✦</span>
+<span class="cancion" style="box-shadow: inset 0 0em 0 #64aad5"><ruby>遠<rt>とお</rt></ruby>い</span> - Lejano<br>
+      <span style="color:#64aad5; box-shadow: inset 0 0em 0 #64aad5;">✦</span>
+      Radicales: 袁 ( <ruby>衣<rt>きぬ</rt></ruby> + <ruby>口<rt>くち</rt></ruby> + <ruby>土<rt>つち</rt></ruby> ) +&nbsp;⻌</h1>
+  </div>
+</div><div class="kanji-card" style="cursor: default; border: 1px solid black; width: 300px; margin: 0px auto; padding: 0px 20px 20px; height: auto; border-radius: 10px; position: relative; display: none;">
+  <div style="margin-left:20px;display:flex; align-items: center;">
+    <div><h1 class="character" style="color:#64aad5; margin: 0; font-size:100px;">陽</h1></div>
+    <div style="margin-left:20px;">
+      <h1 style="font-size:17px; margin: 0;">
+        <span class="español" style="box-shadow: inset 0 0em 0 #64aad5;">Sol</span><br>
+        くんよみ: <span class="kunyomi" style="color:#64aad5; box-shadow: inset 0 0em 0 #64aad5;">ひざ</span><br>
+        おんよみ: <span class="onyomi" style="color:#64aad5; box-shadow: inset 0 0em 0 #64aad5;">ヨウ</span></h1>
+    </div>
+  </div>
+  <div style="margin-top:10px; text-align:center;">
+    <h1 style="font-size:16px; margin: 0;">
+      <span style="color:#64aad5; box-shadow: inset 0 0em 0 #64aad5;">✦</span>&nbsp;<ruby>陽気<rt>ようき</rt></ruby> - Jovial, animado<br>
+      <span style="color:#64aad5; box-shadow: inset 0 0em 0 #64aad5;">✦</span>
+<span class="cancion" style="box-shadow: inset 0 0em 0 #64aad5"><ruby>陽射<rt>ひざ</rt></ruby>し</span> - Luz solar<br>
+      <span style="color:#64aad5; box-shadow: inset 0 0em 0 #64aad5;">✦</span>
+      Radicales:&nbsp;⻖+&nbsp;昜 (&nbsp;勿 +&nbsp;旦 )</h1>
+  </div>
+</div><div class="kanji-card" style="cursor: default; border: 1px solid black; width: 300px; margin: 0px auto; padding: 0px 20px 20px; height: auto; border-radius: 10px; position: relative; display: none;">
+  <div style="margin-left:20px;display:flex; align-items: center;">
+    <div><h1 class="character" style="color:#64aad5; margin: 0; font-size:100px;">射</h1></div>
+    <div style="margin-left:20px;">
+      <h1 style="font-size:17px; margin: 0;"><span class="español" style="box-shadow: inset 0 0em 0 #64aad5;">Disparar</span><br>
+        くんよみ: <span class="kunyomi" style="color:#64aad5; box-shadow: inset 0 0em 0 #64aad5;">い, さ, う</span><br>
+        おんよみ: <span class="onyomi" style="color:#64aad5; box-shadow: inset 0 0em 0 #64aad5;">シャ</span></h1>
+    </div>
+  </div>
+  <div style="margin-top:10px; text-align:center;">
+    <h1 style="font-size:16px; margin: 0;">
+      <span style="color:#64aad5; box-shadow: inset 0 0em 0 #64aad5;">✦</span>&nbsp;<ruby>射<rt>い</rt></ruby>る - Disparar<br>
+      <span style="color:#64aad5; box-shadow: inset 0 0em 0 #64aad5;">✦</span>
+<span class="cancion" style="box-shadow: inset 0 0em 0 #64aad5"><ruby>陽射<rt>ひざ</rt></ruby></span> - Luz solar<br>
+      <span style="color:#64aad5; box-shadow: inset 0 0em 0 #64aad5;">✦</span>
+      Radicales: 身 +&nbsp;寸</h1>
+  </div>
+</div><div class="kanji-card" style="cursor: default; border: 1px solid black; width: 300px; margin: 0px auto; padding: 0px 20px 20px; height: auto; border-radius: 10px; position: relative; display: none;">
+  <div style="margin-left:20px;display:flex; align-items: center;">
+    <div><h1 class="character" style="color:#64aad5; margin: 0; font-size:100px;">浴</h1></div>
+    <div style="margin-left:20px;">
+      <h1 style="font-size:17px; margin: 0;">
+        <span class="español" style="box-shadow: inset 0 0em 0 #64aad5;">Bañarse</span><br>
+        くんよみ: <span class="kunyomi" style="color:#64aad5; box-shadow: inset 0 0em 0 #64aad5;">あ</span><br>
+        おんよみ: <span class="onyomi" style="color:#64aad5; box-shadow: inset 0 0em 0 #64aad5;">ヨク</span></h1>
+    </div>
+  </div>
+  <div style="margin-top:10px; text-align:center;">
+    <h1 style="font-size:16px; margin: 0;">
+      <span style="color:#64aad5; box-shadow: inset 0 0em 0 #64aad5;">✦</span>&nbsp;<ruby>浴衣<rt>ゆかた</rt></ruby> - Yukata<br>
+      <span style="color:#64aad5; box-shadow: inset 0 0em 0 #64aad5;">✦</span>
+<span class="cancion" style="box-shadow: inset 0 0em 0 #64aad5"><ruby>浴<rt>あ</rt></ruby>びる</span> - Bañarse<br>
+      <span style="color:#64aad5; box-shadow: inset 0 0em 0 #64aad5;">✦</span>
+      Radicales:&nbsp;氵+&nbsp;谷 (&nbsp;ハ +&nbsp;𠆢 +&nbsp;口 )</h1>
+  </div>
+</div><div class="kanji-card" style="cursor: default; border: 1px solid black; width: 300px; margin: 0px auto; padding: 0px 20px 20px; height: auto; border-radius: 10px; position: relative; display: none;">
+  <div style="margin-left:20px;display:flex; align-items: center;">
+    <div><h1 class="character" style="color:#64aad5; margin: 0; font-size:100px;">節</h1></div>
+    <div style="margin-left:20px;">
+      <h1 style="font-size:17px; margin: 0;">
+        <span class="español" style="box-shadow: inset 0 0em 0 #64aad5;">Estación, periodo</span><br>
+        くんよみ: <span class="kunyomi" style="color:#64aad5; box-shadow: inset 0 0em 0 #64aad5;">ふし</span><br>
+        おんよみ: <span class="onyomi" style="color:#64aad5; box-shadow: inset 0 0em 0 #64aad5;">セツ, セチ</span></h1>
+    </div>
+  </div>
+  <div style="margin-top:10px; text-align:center;">
+    <h1 style="font-size:16px; margin: 0;">
+      <span style="color:#64aad5; box-shadow: inset 0 0em 0 #64aad5;">✦</span>&nbsp;<ruby>一節<rt>ひとふし</rt></ruby> - Una sección<br>
+      <span style="color:#64aad5; box-shadow: inset 0 0em 0 #64aad5;">✦</span>
+<span class="cancion" style="box-shadow: inset 0 0em 0 #64aad5"><ruby>季節<rt>きせつ</rt></ruby></span> - Estación<br>
+      <span style="color:#64aad5; box-shadow: inset 0 0em 0 #64aad5;">✦</span>
+      Radicales:&nbsp;即 (&nbsp;艮 +&nbsp;卩 ) +&nbsp;⺮</h1>
+  </div>
+</div><div class="kanji-card" style="cursor: default; border: 1px solid black; width: 300px; margin: 0px auto; padding: 0px 20px 20px; height: auto; border-radius: 10px; position: relative; display: none;">
+  <div style="margin-left:20px;display:flex; align-items: center;">
+    <div><h1 class="character" style="color:#64aad5; margin: 0; font-size:100px;">探</h1></div>
+    <div style="margin-left:20px;">
+      <h1 style="font-size:17px; margin: 0;">
+        <span class="español" style="box-shadow: inset 0 0em 0 #64aad5;">Búsqueda</span><br>
+        くんよみ: <span class="kunyomi" style="color:#64aad5; box-shadow: inset 0 0em 0 #64aad5;">すが, さが</span><br>
+        おんよみ: <span class="onyomi" style="color:#64aad5; box-shadow: inset 0 0em 0 #64aad5;">タン</span></h1>
+    </div>
+  </div>
+  <div style="margin-top:10px; text-align:center;">
+    <h1 style="font-size:16px; margin: 0;">
+      <span style="color:#64aad5; box-shadow: inset 0 0em 0 #64aad5;">✦</span>&nbsp;<ruby>探検<rt>たんけん</rt></ruby> - Expedición<br>
+      <span style="color:#64aad5; box-shadow: inset 0 0em 0 #64aad5;">✦</span>
+<span class="cancion" style="box-shadow: inset 0 0em 0 #64aad5"><ruby>探<rt>さが</rt></ruby>す</span> - Buscar<br>
+      <span style="color:#64aad5; box-shadow: inset 0 0em 0 #64aad5;">✦</span>
+      Radicales:&nbsp;扌+&nbsp;罙 (&nbsp;㓁 + 木 )</h1>
+  </div>
+</div><div class="kanji-card" style="cursor: default; border: 1px solid black; width: 300px; margin: 0px auto; padding: 0px 20px 20px; height: auto; border-radius: 10px; position: relative; display: none;">
+  <div style="margin-left:20px;display:flex; align-items: center;">
+    <div><h1 class="character" style="color:#64aad5; margin: 0; font-size:100px;">互</h1></div>
+    <div style="margin-left:20px;">
+      <h1 style="font-size:17px; margin: 0;">
+        <span class="español" style="box-shadow: inset 0 0em 0 #64aad5;">Mutuo</span><br>
+        くんよみ: <span class="kunyomi" style="color:#64aad5; box-shadow: inset 0 0em 0 #64aad5;">たが</span><br>
+        おんよみ: <span class="onyomi" style="color:#64aad5; box-shadow: inset 0 0em 0 #64aad5;">ゴ</span></h1>
+    </div>
+  </div>
+  <div style="margin-top:10px; text-align:center;">
+    <h1 style="font-size:16px; margin: 0;">
+      <span style="color:#64aad5; box-shadow: inset 0 0em 0 #64aad5;">✦</span>&nbsp;<ruby>五<rt>ご</rt></ruby><ruby>角<rt>かく</rt></ruby> - Even, equal<br>
+      <span style="color:#64aad5; box-shadow: inset 0 0em 0 #64aad5;">✦</span>
+<span class="cancion" style="box-shadow: inset 0 0em 0 #64aad5"><ruby>互<rt>たが</rt></ruby>いに</span>&nbsp;- Mutuamente<br>
+      <span style="color:#64aad5; box-shadow: inset 0 0em 0 #64aad5;">✦</span>
+      Radicales: -</h1>
+  </div>
+</div><div class="kanji-card" style="cursor: default; border: 1px solid black; width: 300px; margin: 0px auto; padding: 0px 20px 20px; height: auto; border-radius: 10px; position: relative; display: none;">
+  <div style="margin-left:20px;display:flex; align-items: center;">
+    <div><h1 class="character" style="color:#64aad5; margin: 0; font-size:100px;">感</h1></div>
+    <div style="margin-left:20px;">
+      <h1 style="font-size:17px; margin: 0;">
+        <span class="español" style="box-shadow: inset 0 0em 0 #64aad5;">Emoción</span><br>
+        くんよみ: <font color="#64aad5">-</font><br>
+        おんよみ: <span class="onyomi" style="color:#64aad5; box-shadow: inset 0 0em 0 #64aad5;">カン</span></h1>
+    </div>
+  </div>
+  <div style="margin-top:10px; text-align:center;">
+    <h1 style="font-size:16px; margin: 0;">
+      <span style="color:#64aad5; box-shadow: inset 0 0em 0 #64aad5;">✦</span>&nbsp;<ruby>感<rt>かん</rt></ruby>じる - Sentir<br>
+      <span style="color:#64aad5; box-shadow: inset 0 0em 0 #64aad5;">✦</span>
+<span class="cancion" style="box-shadow: inset 0 0em 0 #64aad5"><ruby>予感<rt>よかん</rt></ruby></span> - Presentimiento<br>
+      <span style="color:#64aad5; box-shadow: inset 0 0em 0 #64aad5;">✦</span>
+      Radicales:&nbsp;咸 + 心</h1>
+  </div>
+</div><div class="kanji-card" style="cursor: default; border: 1px solid black; width: 300px; margin: 0px auto; padding: 0px 20px 20px; height: auto; border-radius: 10px; position: relative; display: none;">
+  <div style="margin-left:20px;display:flex; align-items: center;">
+    <div><h1 class="character" style="color:#64aad5; margin: 0; font-size:100px;">懐</h1></div>
+    <div style="margin-left:20px;">
+      <h1 style="font-size:17px; margin: 0;">
+        <span class="español" style="box-shadow: inset 0 0em 0 #64aad5;">Nostalgia</span><br>
+        くんよみ: <span class="kunyomi" style="color:#64aad5; box-shadow: inset 0 0em 0 #64aad5;">なつ</span><br>
+        おんよみ: <span class="onyomi" style="color:#64aad5; box-shadow: inset 0 0em 0 #64aad5;">カイ, エ</span></h1>
+    </div>
+  </div>
+  <div style="margin-top:10px; text-align:center;">
+    <h1 style="font-size:16px; margin: 0;">
+      <span style="color:#64aad5; box-shadow: inset 0 0em 0 #64aad5;">✦</span>&nbsp;<ruby>追懐<rt>ついかい</rt></ruby> - Reminiscencia<br>
+      <span style="color:#64aad5; box-shadow: inset 0 0em 0 #64aad5;">✦</span>
+<span class="cancion" style="box-shadow: inset 0 0em 0 #64aad5"><ruby>懐<rt>なつ</rt></ruby>かしい</span> - Nostálgico<br>
+      <span style="color:#64aad5; box-shadow: inset 0 0em 0 #64aad5;">✦</span>
+      Radicales:&nbsp;忄+&nbsp; 衣 +&nbsp;罒 + 十</h1>
+  </div>
+</div><div class="kanji-card" style="cursor: default; border: 1px solid black; width: 300px; margin: 0px auto; padding: 0px 20px 20px; height: auto; border-radius: 10px; position: relative; display: none;">
+  <div style="margin-left:20px;display:flex; align-items: center;">
+    <div><h1 class="character" style="color:#64aad5; margin: 0; font-size:100px;">胸</h1></div>
+    <div style="margin-left:20px;">
+      <h1 style="font-size:17px; margin: 0;">
+        <span class="español" style="box-shadow: inset 0 0em 0 #64aad5;">Pecho</span><br>
+        くんよみ: <span class="kunyomi" style="color:#64aad5; box-shadow: inset 0 0em 0 #64aad5;">むね, むな</span><br>
+        おんよみ: <span class="onyomi" style="color:#64aad5; box-shadow: inset 0 0em 0 #64aad5;">キョウ</span></h1>
+    </div>
+  </div>
+  <div style="margin-top:10px; text-align:center;">
+    <h1 style="font-size:16px; margin: 0;">
+      <span style="color:#64aad5; box-shadow: inset 0 0em 0 #64aad5;">✦</span>&nbsp;<ruby>胸<rt>きょう</rt></ruby><ruby>中<rt>ちゅう</rt></ruby> - One's heart or mind<br>
+      <span style="color:#64aad5; box-shadow: inset 0 0em 0 #64aad5;">✦</span>
+<span class="cancion" style="box-shadow: inset 0 0em 0 #64aad5"><ruby>胸<rt>むね</rt></ruby></span> - Pecho, corazón<br>
+      <span style="color:#64aad5; box-shadow: inset 0 0em 0 #64aad5;">✦</span>
+      Radicales:&nbsp;⺼+&nbsp;勹 +&nbsp;凶</h1>
+  </div>
+</div><div class="kanji-card" style="cursor: default; border: 1px solid black; width: 300px; margin: 0px auto; padding: 0px 20px 20px; height: auto; border-radius: 10px; position: relative; display: none;">
+  <div style="margin-left:20px;display:flex; align-items: center;">
+    <div><h1 class="character" style="color:#64aad5; margin: 0; font-size:100px;">奇</h1></div>
+    <div style="margin-left:20px;">
+      <h1 style="font-size:17px; margin: 0;">
+        <span class="español" style="box-shadow: inset 0 0em 0 #64aad5;">Extraño</span><br>
+        くんよみ: <span class="kunyomi" style="color:#64aad5; box-shadow: inset 0 0em 0 #64aad5;">く, あや</span><br>
+        おんよみ: <span class="onyomi" style="color:#64aad5; box-shadow: inset 0 0em 0 #64aad5;">キ</span></h1>
+    </div>
+  </div>
+  <div style="margin-top:10px; text-align:center;">
+    <h1 style="font-size:16px; margin: 0;">
+      <span style="color:#64aad5; box-shadow: inset 0 0em 0 #64aad5;">✦</span>&nbsp;<ruby>怪<rt>かい</rt></ruby><ruby>奇<rt>き</rt></ruby> - Bizarro<br>
+      <span style="color:#64aad5; box-shadow: inset 0 0em 0 #64aad5;">✦</span>
+<span class="cancion" style="box-shadow: inset 0 0em 0 #64aad5"><ruby>奇跡<rt>きせき</rt></ruby></span> - Milagro<br>
+      <span style="color:#64aad5; box-shadow: inset 0 0em 0 #64aad5;">✦</span>
+      Radicales: <ruby>大<rt>だい</rt></ruby> +&nbsp;<ruby>可<rt>か</rt></ruby></h1>
+  </div>
+</div><div class="kanji-card" style="cursor: default; border: 1px solid black; width: 300px; margin: 0px auto; padding: 0px 20px 20px; height: auto; border-radius: 10px; position: relative; display: none;">
+  <div style="margin-left:20px;display:flex; align-items: center;">
+    <div><h1 class="character" style="color:#64aad5; margin: 0; font-size:100px;">跡</h1></div>
+    <div style="margin-left:20px;">
+      <h1 style="font-size:17px; margin: 0;">
+        <span class="español" style="box-shadow: inset 0 0em 0 #64aad5;">Marca</span><br>
+        くんよみ: <span class="kunyomi" style="color:#64aad5; box-shadow: inset 0 0em 0 #64aad5;">あと</span><br>
+        おんよみ: <span class="onyomi" style="color:#64aad5; box-shadow: inset 0 0em 0 #64aad5;">セキ</span></h1>
+    </div>
+  </div>
+  <div style="margin-top:10px; text-align:center;">
+    <h1 style="font-size:16px; margin: 0;">
+      <span style="color:#64aad5; box-shadow: inset 0 0em 0 #64aad5;">✦</span>&nbsp;<ruby>史跡<rt>しせき</rt></ruby> - Monumento histórico<br>
+      <span style="color:#64aad5; box-shadow: inset 0 0em 0 #64aad5;">✦</span>
+<span class="cancion" style="box-shadow: inset 0 0em 0 #64aad5"><ruby>奇跡<rt>きせき</rt></ruby></span> - Milagro<br>
+      <span style="color:#64aad5; box-shadow: inset 0 0em 0 #64aad5;">✦</span>
+      Radicales:&nbsp;⻊+&nbsp;<ruby>亦<rt>また</rt></ruby></h1>
+  </div>
+</div><div class="kanji-card" style="cursor: default; border: 1px solid black; width: 300px; margin: 0px auto; padding: 0px 20px 20px; height: auto; border-radius: 10px; position: relative; display: none;">
+  <div style="margin-left:20px;display:flex; align-items: center;">
+    <div><h1 class="character" style="color:#64aad5; margin: 0; font-size:100px;">照</h1></div>
+    <div style="margin-left:20px;">
+      <h1 style="font-size:17px; margin: 0;">
+        <span class="español" style="box-shadow: inset 0 0em 0 #64aad5;">Iluminar</span><br>
+        くんよみ: <span class="kunyomi" style="color:#64aad5; box-shadow: inset 0 0em 0 #64aad5;">て</span><br>
+        おんよみ: <span class="onyomi" style="color:#64aad5; box-shadow: inset 0 0em 0 #64aad5;">ショウ</span></h1>
+    </div>
+  </div>
+  <div style="margin-top:10px; text-align:center;">
+    <h1 style="font-size:16px; margin: 0;">
+      <span style="color:#64aad5; box-shadow: inset 0 0em 0 #64aad5;">✦</span>&nbsp;<ruby>照<rt>しょう</rt></ruby><ruby>射<rt>しゃ</rt></ruby> - Irradiación</h1><h1 style="font-size:16px; margin: 0;">
+      <span style="color:#64aad5; box-shadow: inset 0 0em 0 #64aad5;">✦</span>
+<span class="cancion" style="box-shadow: inset 0 0em 0 #64aad5"><ruby>照<rt>て</rt></ruby>らす</span> - Iluminar<br>
+      <span style="color:#64aad5; box-shadow: inset 0 0em 0 #64aad5;">✦</span>
+      Radicales:&nbsp;昭 (&nbsp;召 + 日 ) +&nbsp;灬</h1>
+  </div>
+</div><div class="kanji-card" style="cursor: default; border: 1px solid black; width: 300px; margin: 0px auto; padding: 0px 20px 20px; height: auto; border-radius: 10px; position: relative; display: none;">
+  <div style="margin-left:20px;display:flex; align-items: center;">
+    <div><h1 class="character" style="color:#64aad5; margin: 0; font-size:100px;">希</h1></div>
+    <div style="margin-left:20px;">
+      <h1 style="font-size:17px; margin: 0;">
+        <span class="español" style="box-shadow: inset 0 0em 0 #64aad5;">Esperanza</span><br>
+        くんよみ: <span class="kunyomi" style="color:#64aad5; box-shadow: inset 0 0em 0 #64aad5;">まれ</span><br>
+        おんよみ: <span class="onyomi" style="color:#64aad5; box-shadow: inset 0 0em 0 #64aad5;">キ, ケ</span></h1>
+    </div>
+  </div>
+  <div style="margin-top:10px; text-align:center;">
+    <h1 style="font-size:16px; margin: 0;">
+      <span style="color:#64aad5; box-shadow: inset 0 0em 0 #64aad5;">✦</span>&nbsp;<ruby>羽毛<rt>うもう</rt></ruby> - Plumas<br>
+      <span style="color:#64aad5; box-shadow: inset 0 0em 0 #64aad5;">✦</span>
+<span class="cancion" style="box-shadow: inset 0 0em 0 #64aad5"><ruby>希望<rt>きぼう</rt></ruby></span> - Esperanza<br>
+      <span style="color:#64aad5; box-shadow: inset 0 0em 0 #64aad5;">✦</span>
+      Radicales: 乂 +&nbsp;布 (&nbsp;𠂇 +&nbsp;巾 )</h1>
+  </div>
+</div></div>
+            <button class="flecha" id="btn-sig-s1">›</button>
+          </div>
+          <div style="display:flex; justify-content:center; gap:20px; margin-top:20px; margin-bottom:0px;">
+            <button class="boton" id="btn-popup-s1" style="height:80px;border-radius:12px;width:105px"><h1 style="font-size:20px">ボード</h1></button>
+            
+          </div>
+        </div>
+        <div id="overlay-s1" style="display: none; position: fixed; top: 0px; left: 0px; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 900;"></div>
+      </div>
+      <div class="tabla-div" style="background-color: white; width: 900px; margin-left: 0px; padding: 20px; border-radius: 20px; display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); box-shadow: rgba(0, 0, 0, 0.5) 0px 0px 15px; z-index: 1000; max-height: 80vh; overflow: hidden;" id="popup-s1">
+        <div class="tabla-div-2" style="display:flex">
+          <button class="cruz" style="cursor:pointer;font-size:20px;background-color:white;border:0px;color:#64aad5" id="btn-cerrar-popup-s1">✕</button>
+          <h1 style="margin-left:300px;color:#64aad5">漢字のボード</h1>
+        </div>
+        <div id="table-container-s1" style="max-height:60vh;overflow-y:auto;">
+          <table id="kanji-table-s1">
+            <thead><tr>
+              <th style="border-right:1px solid white">漢字</th>
+              <th style="border-right:1px solid white">くんよみ</th>
+              <th style="border-right:1px solid white">おんよみ</th>
+              <th style="border-right:1px solid white">スパイン語</th>
+              <th style="border-right:1px solid white">歌に</th>
+            </tr></thead>
+            <tbody><tr><td style="font-size:50px;">羽</td><td>はね</td><td>ウ</td><td>Pluma</td><td><ruby>羽根<rt>はね</rt></ruby></td></tr><tr><td style="font-size:50px;">遠</td><td>とお</td><td>エン, オン</td><td>Lejos</td><td><ruby>遠<rt>とお</rt></ruby>い</td></tr><tr><td style="font-size:50px;">陽</td><td>ひざ</td><td>ヨウ</td><td>Sol</td><td><ruby>陽射<rt>ひざ</rt></ruby>し</td></tr><tr><td style="font-size:50px;">射</td><td>い, さ, う</td><td>シャ</td><td>Disparar</td><td><ruby>陽射<rt>ひざ</rt></ruby></td></tr><tr><td style="font-size:50px;">浴</td><td>あ</td><td>ヨク</td><td>Bañarse</td><td><ruby>浴<rt>あ</rt></ruby>びる</td></tr><tr><td style="font-size:50px;">節</td><td>ふし</td><td>セツ, セチ</td><td>Estación, periodo</td><td><ruby>季節<rt>きせつ</rt></ruby></td></tr><tr><td style="font-size:50px;">探</td><td>すが, さが</td><td>タン</td><td>Búsqueda</td><td><ruby>探<rt>さが</rt></ruby>す</td></tr><tr><td style="font-size:50px;">互</td><td>たが</td><td>ゴ</td><td>Mutuo</td><td><ruby>互<rt>たが</rt></ruby>いに</td></tr><tr><td style="font-size:50px;">感</td><td></td><td>カン</td><td>Emoción</td><td><ruby>予感<rt>よかん</rt></ruby></td></tr><tr><td style="font-size:50px;">懐</td><td>なつ</td><td>カイ, エ</td><td>Nostalgia</td><td><ruby>懐<rt>なつ</rt></ruby>かしい</td></tr><tr><td style="font-size:50px;">胸</td><td>むね, むな</td><td>キョウ</td><td>Pecho</td><td><ruby>胸<rt>むね</rt></ruby></td></tr><tr><td style="font-size:50px;">奇</td><td>く, あや</td><td>キ</td><td>Extraño</td><td><ruby>奇跡<rt>きせき</rt></ruby></td></tr><tr><td style="font-size:50px;">跡</td><td>あと</td><td>セキ</td><td>Marca</td><td><ruby>奇跡<rt>きせき</rt></ruby></td></tr><tr><td style="font-size:50px;">照</td><td>て</td><td>ショウ</td><td>Iluminar</td><td><ruby>照<rt>て</rt></ruby>らす</td></tr><tr><td style="font-size:50px;">希</td><td>まれ</td><td>キ, ケ</td><td>Esperanza</td><td><ruby>希望<rt>きぼう</rt></ruby></td></tr></tbody>
+          </table>
+        </div>
+      </div>
+    </div></div>
+
+<!-- BOTONES SECCIÓN -->
+<div style="text-align:center; margin-top:10px; margin-bottom:10px; display:flex; gap:12px; justify-content:center;">
+  
+  
+  
+</div>
+
+<div style="text-align:center;">
+
+  
+  
+  
+</div>
+<br>
+
+
+
+</a></div><a href"mermaid_festa_vol_1.html"="">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div id="give-freely-root-kkkbiiikppgjdiebcabomlbidfodipjg" class="give-freely-root" data-extension-id="kkkbiiikppgjdiebcabomlbidfodipjg" data-extension-name="Substital: Add subtitles to videos and movies" bis_skin_checked="1" style="display: block;"></div></a><div id="jpdictionary" bis_skin_checked="1"><a href"mermaid_festa_vol_1.html"=""><div class="o-search-mobile" bis_skin_checked="1" style="top: 0px; left: 0px; display: none;"><img alt="JP Dictionary" width="27" height="27" src="data:image/png;base64,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" style="width: 27px; height: 27px;"></div></a><div class="o-popup-tag o-bg-white o-border o-rounded o-shadow" bis_skin_checked="1" style="width: 400px; top: 0px; left: 0px; display: none;"><a href"mermaid_festa_vol_1.html"=""></a><div bis_skin_checked="1"><a href"mermaid_festa_vol_1.html"=""><button type="button" aria-label="Close" class="o-btn-close o-position-absolute o-top-0 o-end-0 o-mt-1 o-me-1"></button><ul role="tablist" class="o-nav o-nav-tabs o-pop-nav"><span><svg aria-hidden="true" focusable="false" data-icon="volume-high" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" class="o-pop-speak o-svg-inline--fa"><path fill="currentColor" d="M533.6 32.5C598.5 85.3 640 165.8 640 256s-41.5 170.8-106.4 223.5c-10.3 8.4-25.4 6.8-33.8-3.5s-6.8-25.4 3.5-33.8C557.5 398.2 592 331.2 592 256s-34.5-142.2-88.7-186.3c-10.3-8.4-11.8-23.5-3.5-33.8s23.5-11.8 33.8-3.5zM473.1 107c43.2 35.2 70.9 88.9 70.9 149s-27.7 113.8-70.9 149c-10.3 8.4-25.4 6.8-33.8-3.5s-6.8-25.4 3.5-33.8C475.3 341.3 496 301.1 496 256s-20.7-85.3-53.2-111.8c-10.3-8.4-11.8-23.5-3.5-33.8s23.5-11.8 33.8-3.5zm-60.5 74.5C434.1 199.1 448 225.9 448 256s-13.9 56.9-35.4 74.5c-10.3 8.4-25.4 6.8-33.8-3.5s-6.8-25.4 3.5-33.8C393.1 284.4 400 271 400 256s-6.9-28.4-17.7-37.3c-10.3-8.4-11.8-23.5-3.5-33.8s23.5-11.8 33.8-3.5zM301.1 34.8C312.6 40 320 51.4 320 64V448c0 12.6-7.4 24-18.9 29.2s-25 3.1-34.4-5.3L131.8 352H64c-35.3 0-64-28.7-64-64V224c0-35.3 28.7-64 64-64h67.8L266.7 40.1c9.4-8.4 22.9-10.4 34.4-5.3z"></path></svg></span><li role="presentation" class="o-nav-item"><div data-bs-toggle="tab" aria-selected="true" class="o-nav-link o-active" bis_skin_checked="1">Word</div></li><li role="presentation" class="o-nav-item"><div data-bs-toggle="tab" aria-selected="false" class="o-nav-link" bis_skin_checked="1">Kanji</div></li><li role="presentation" class="o-nav-item"><div data-bs-toggle="tab" aria-selected="false" class="o-nav-link" bis_skin_checked="1">Translate</div></li></ul></a><div class="o-selected-result o-pt-1" bis_skin_checked="1"><a href"mermaid_festa_vol_1.html"=""><div bis_skin_checked="1"> Searching for ... </div></a><div class="o-fs-6 o-mt-2" bis_skin_checked="1" style="line-height: 1.7;"><a href"mermaid_festa_vol_1.html"=""></a><div class="o-float-start" bis_skin_checked="1"><a href"mermaid_festa_vol_1.html"=""></a><a class="o-link-secondary o-text-decoration-none o-cpt">Hide this time</a></div><div class="o-float-end o-me-1" bis_skin_checked="1"><a href="https://jpdictionary.com/setting/" target="_blank" class="o-link-secondary o-text-decoration-none">Setting</a></div></div></div></div></div></div><div id="jpdictionarySetting" url="https://jpdictionary.com/setting/" bis_skin_checked="1"></div><div id="jpdictionaryOff" bis_skin_checked="1"></div><div id="mttContainer" class="bootstrapiso notranslate" data-original-title="" title="" bis_skin_checked="1" style="transform: translate(733px, 604px);"></div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+
+  // Inicializar índice activo en cada contenedor de tarjetas
+  document.querySelectorAll("[id^='kanji-display-']").forEach(function(contenedor) {
+    contenedor.dataset.indice = "0";
+    var tarjetas = Array.from(contenedor.querySelectorAll(".kanji-card"));
+    tarjetas.forEach(function(t, i) {
+      t.style.display = i === 0 ? "block" : "none";
+    });
+  });
+
+  function moverTarjeta(sid, delta) {
+    var contenedor = document.getElementById("kanji-display-" + sid);
+    if (!contenedor) return;
+    var tarjetas = Array.from(contenedor.querySelectorAll(".kanji-card"));
+    if (tarjetas.length === 0) return;
+    var actual = parseInt(contenedor.dataset.indice) || 0;
+    var nuevo = (actual + delta + tarjetas.length) % tarjetas.length;
+    tarjetas[actual].style.display = "none";
+    tarjetas[nuevo].style.display = "block";
+    contenedor.dataset.indice = String(nuevo);
+    aplicarTamanosMobile();
+  }
+
+  // TARJETAS: flecha anterior
+  document.querySelectorAll("[id^='btn-ant-']").forEach(function(btn) {
+    btn.onclick = function() {
+      moverTarjeta(btn.id.replace("btn-ant-", ""), -1);
+    };
+  });
+
+  // TARJETAS: flecha siguiente
+  document.querySelectorAll("[id^='btn-sig-']").forEach(function(btn) {
+    btn.onclick = function() {
+      moverTarjeta(btn.id.replace("btn-sig-", ""), 1);
+    };
+  });
+
+  // POPUP: abrir
+  document.querySelectorAll("[id^='btn-popup-']").forEach(function(btn) {
+    btn.onclick = function() {
+      var sid = btn.id.replace("btn-popup-", "");
+      var popup = document.getElementById("popup-" + sid);
+      var overlay = document.getElementById("overlay-" + sid);
+      if (popup) popup.style.display = "block";
+      if (overlay) overlay.style.display = "block";
+    };
+  });
+
+  // POPUP: cerrar con botón ✕
+  document.querySelectorAll("[id^='btn-cerrar-popup-']").forEach(function(btn) {
+    btn.onclick = function() {
+      var sid = btn.id.replace("btn-cerrar-popup-", "");
+      var popup = document.getElementById("popup-" + sid);
+      var overlay = document.getElementById("overlay-" + sid);
+      if (popup) popup.style.display = "none";
+      if (overlay) overlay.style.display = "none";
+    };
+  });
+
+  // POPUP: cerrar haciendo clic en el overlay
+  document.querySelectorAll("[id^='overlay-']").forEach(function(overlay) {
+    overlay.onclick = function() {
+      var sid = overlay.id.replace("overlay-", "");
+      var popup = document.getElementById("popup-" + sid);
+      if (popup) popup.style.display = "none";
+      overlay.style.display = "none";
+    };
+  });
+
+  // MOBILE: ajustar tamaño del kanji principal en tarjetas
+  function aplicarTamanosMobile() {
+    if (window.innerWidth > 700) return;
+    document.querySelectorAll(".kanji-card").forEach(function(card) {
+      card.style.margin = "0 auto";
+      card.style.width = "auto";
+      card.style.maxWidth = "210px";
+      var char = card.querySelector(".character");
+      if (char) char.style.setProperty("font-size", "60px", "important");
+    });
+  }
+  aplicarTamanosMobile();
+  window.addEventListener("resize", aplicarTamanosMobile);
+
+});
+</script></body></html>
